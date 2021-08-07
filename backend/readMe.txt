@@ -1,0 +1,1 @@
+This folder contains all files for the backend of the project
