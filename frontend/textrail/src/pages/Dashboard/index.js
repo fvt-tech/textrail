@@ -1,12 +1,23 @@
 import React from "react";
-import DashboardContent from "../../components/Content";
 import SideBarAndContentLayout from "../../layouts/SideBarAndContent";
 import "./styles.scss";
+import { DashboardMainContent } from "./utils";
+import { Switch, Route } from "react-router-dom";
 const Dashboard = () => {
   return (
     <div className="fmarket">
       <SideBarAndContentLayout>
-        <DashboardContent />
+        <Switch>
+          {DashboardMainContent.map((item) => (
+            <Route path={item.route} exact={item.exact}>
+              {typeof item.component !== "string" ? (
+                <item.component {...item} />
+              ) : (
+                item.component
+              )}
+            </Route>
+          ))}
+        </Switch>
       </SideBarAndContentLayout>
     </div>
   );

@@ -1,12 +1,13 @@
 import {
   HomeOutlined,
   InboxOutlined,
-  MessageOutlined,
-  CalendarOutlined,
-  AppstoreOutlined,
+  UnorderedListOutlined,
+  BookOutlined,
+  SendOutlined,
   BarChartOutlined,
-  TableOutlined,
-  FormOutlined,
+  ClockCircleOutlined,
+  MoneyCollectOutlined,
+  DesktopOutlined,
 } from "@ant-design/icons";
 export const sampleSideBarSections = [
   {
@@ -15,48 +16,62 @@ export const sampleSideBarSections = [
       {
         icon: <HomeOutlined />,
         label: "Dashboard",
+        link: "/",
       },
     ],
   },
   {
-    title: "App",
+    title: "Messaging",
     buttonList: [
       {
-        icon: <InboxOutlined />,
-        label: "Inbox",
+        icon: <SendOutlined />,
+        label: "Send SMS",
+        link: "/messaging",
       },
       {
-        icon: <MessageOutlined />,
-        label: "Chat",
+        icon: <ClockCircleOutlined />,
+        label: "Scheduled SMS",
+        link: "/messaging",
       },
       {
-        icon: <CalendarOutlined />,
-        label: "Calendar",
+        icon: <UnorderedListOutlined />,
+        label: "SMS Templates",
+        link: "/messaging",
       },
       {
-        icon: <AppstoreOutlined />,
-        label: "Taskboard",
+        icon: <BookOutlined />,
+        label: "Address Book",
+        link: "/messaging",
       },
     ],
   },
   {
-    title: "UI Elements",
+    title: "Misc",
     buttonList: [
       {
-        icon: <InboxOutlined />,
-        label: "Component",
-      },
-      {
-        icon: <FormOutlined />,
-        label: "Forms",
-      },
-      {
-        icon: <TableOutlined />,
-        label: "Tables",
+        icon: <MoneyCollectOutlined />,
+        label: "Payment",
+        link: "/misc",
       },
       {
         icon: <BarChartOutlined />,
-        label: "Charts",
+        label: "Reports",
+        link: "/misc",
+      },
+      {
+        icon: <DesktopOutlined />,
+        label: "API",
+        link: "/misc",
+      },
+    ],
+  },
+  {
+    title: "My Account",
+    buttonList: [
+      {
+        icon: <InboxOutlined />,
+        label: "Profile",
+        link: "/profile",
       },
     ],
   },

@@ -1,10 +1,5 @@
 import React from "react";
-import { Layout, Menu } from "antd";
-import {
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
+import { Layout} from "antd";
 import SideBarSection from "./components/SideBarSection";
 import { sampleSideBarSections } from "../../utils";
 
