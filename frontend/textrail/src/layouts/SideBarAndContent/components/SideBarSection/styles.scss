@@ -1,0 +1,19 @@
+.sidebarSection {
+  padding: 20px 15px 30px;
+  text-align: left;
+  border-bottom: 1px solid gainsboro;
+
+  .sectionHeader{
+      font-weight: 700;
+      display: block;
+      font-size: 13px;
+      margin-bottom: 10px;
+      padding-left: 5%;
+  }
+  .sectionButtons{
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
