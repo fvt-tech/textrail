@@ -1,0 +1,16 @@
+.addNewTemplateButton{
+    cursor: pointer;
+    background-color: slateblue;
+    color: white;
+    width: 80px;
+    padding: 5px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+
+    .label{
+        margin-left: 10px;
+    }
+
+}

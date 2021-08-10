@@ -1,13 +1,12 @@
 import React from "react";
 import "./styles.scss";
-const DashboardCard = ({ children, title }) => {
+const DashboardCard = ({ children, title, actions }) => {
   return (
     <div className="dashboardCard">
-      {title && (
-        <div className="cardTitle">
-          <span>{title}</span>
-        </div>
-      )}
+      <div className="cardTitle">
+        {title && <span>{title}</span>}
+        {actions && <div>{actions}</div>}
+      </div>
       {children}
     </div>
   );

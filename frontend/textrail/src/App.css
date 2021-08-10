@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-modal-content {
+  border-radius: 10px  !important;
+}
+.ant-modal-header {
+  border-radius: 10px 10px 0px 0px !important;
+}

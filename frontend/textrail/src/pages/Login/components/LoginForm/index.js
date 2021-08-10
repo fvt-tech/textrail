@@ -1,11 +1,23 @@
-import React from 'react'
-import "./styles.scss"
+import { Button, Form, Input } from "antd";
+import React from "react";
+import "./styles.scss";
 const LoginForm = () => {
-    return (
-        <form className="loginForm">
-            <h2>Login</h2>   
-        </form>
-    )
-}
+  return (
+    <Form className="loginForm">
+    <h2>Login</h2>
+      <Form layout="vertical">
+        <Form.Item label="Email">
+          <Input size="large" />
+        </Form.Item>
+        <Form.Item label="Password">
+          <Input.Password size="large"/>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" block size="large">Login</Button>
+        </Form.Item>
+      </Form>
+    </Form>
+  );
+};
 
-export default LoginForm
+export default LoginForm;
