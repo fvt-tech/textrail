@@ -1,8 +1,8 @@
 import React from "react";
 import AuthLayout from "../../layouts/AuthLayout";
-import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/SignUpForm";
 import "./styles.scss";
-const DashboardLogin = () => {
+const DashboardSignUp = () => {
   return (
     <AuthLayout>
       <LoginForm />
@@ -10,4 +10,4 @@ const DashboardLogin = () => {
   );
 };
 
-export default DashboardLogin;
+export default DashboardSignUp;

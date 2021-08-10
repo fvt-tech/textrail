@@ -31,17 +31,17 @@ export const sampleSideBarSections = [
       {
         icon: <ClockCircleOutlined />,
         label: "Scheduled SMS",
-        link: "/messaging",
+        link: "/messaging/scheduled",
       },
       {
         icon: <UnorderedListOutlined />,
         label: "SMS Templates",
-        link: "/messaging",
+        link: "/messaging/templates",
       },
       {
         icon: <BookOutlined />,
         label: "Address Book",
-        link: "/messaging",
+        link: "/messaging/addressBook",
       },
     ],
   },
@@ -49,19 +49,19 @@ export const sampleSideBarSections = [
     title: "Misc",
     buttonList: [
       {
-        icon: <MoneyCollectOutlined />,
-        label: "Payment",
-        link: "/misc",
-      },
-      {
         icon: <BarChartOutlined />,
         label: "Reports",
         link: "/misc",
       },
       {
+        icon: <MoneyCollectOutlined />,
+        label: "Payment",
+        link: "/misc/payment",
+      },
+      {
         icon: <DesktopOutlined />,
         label: "API",
-        link: "/misc",
+        link: "/misc/api",
       },
     ],
   },

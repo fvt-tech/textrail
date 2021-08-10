@@ -1,7 +1,9 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import "./styles.scss";
 const SideBarButton = ({ icon, label, link }) => {
-  const handleRoute = () => (window.location.href = link);
+  const history = useHistory();
+  const handleRoute = () => history.replace(link);
   return (
     <button onClick={handleRoute} className="sideBarButton">
       {icon}

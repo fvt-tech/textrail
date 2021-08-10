@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.scss";
-const LoginCard = ({ children }) => {
+const AuthCard = ({ children }) => {
   return <div className="loginCard">{children}</div>;
 };
 
-export default LoginCard;
+export default AuthCard;
