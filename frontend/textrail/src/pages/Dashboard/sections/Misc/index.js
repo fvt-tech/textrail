@@ -1,14 +1,15 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import API from "./pages/API";
+import Payment from "./pages/Payment";
+import Reports from "./pages/Reports";
 const MiscSection = (props) => {
   console.log(props.route);
   return (
     <Switch>
-      <Route path={`${props.route}/api`}>This is misc api</Route>
-      <Route path={`${props.route}/payment`}>This is misc payment</Route>
-      <Route exact path={props.route}>
-        This is misc home( reports)
-      </Route>
+      <Route path={`${props.route}/api`} component={API} />
+      <Route path={`${props.route}/payment`} component={Payment} />
+      <Route exact path={props.route} component={Reports}/>
     </Switch>
   );
 };
