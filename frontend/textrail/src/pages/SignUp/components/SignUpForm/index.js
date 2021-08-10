@@ -24,7 +24,7 @@ const SignUpForm = () => {
         <Input.Password />
       </Form.Item>
       <Form.Item>
-        <Button type="primary" block size="large">
+        <Button type="primary" block size="large" onClick={()=>window.location.href='/dashboard/home'}>
           SignUp
         </Button>
       </Form.Item>

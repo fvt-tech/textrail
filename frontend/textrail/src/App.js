@@ -1,6 +1,6 @@
 import "./App.css";
 import "antd/dist/antd.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import DashboardSignUp from "./pages/SignUp";
@@ -12,6 +12,9 @@ function App() {
           <Route path="/signup" component={DashboardSignUp} />
           <Route path="/login" component={Login} />
           <Route path="/dashboard" component={Dashboard} />
+          <Route exact path='/'>
+            <Redirect to='login'/>
+          </Route>
         </Switch>
       </Router>
     </div>
