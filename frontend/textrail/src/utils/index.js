@@ -16,7 +16,7 @@ export const sampleSideBarSections = [
       {
         icon: <HomeOutlined />,
         label: "Dashboard",
-        link: "/",
+        link: "/dashboard/home",
       },
     ],
   },
@@ -26,22 +26,22 @@ export const sampleSideBarSections = [
       {
         icon: <SendOutlined />,
         label: "Send SMS",
-        link: "/messaging",
+        link: "/dashboard/messaging/sms",
       },
       {
         icon: <ClockCircleOutlined />,
         label: "Scheduled SMS",
-        link: "/messaging/scheduled",
+        link: "/dashboard/messaging/scheduled",
       },
       {
         icon: <UnorderedListOutlined />,
         label: "SMS Templates",
-        link: "/messaging/templates",
+        link: "/dashboard/messaging/templates",
       },
       {
         icon: <BookOutlined />,
         label: "Address Book",
-        link: "/messaging/addressBook",
+        link: "/dashboard/messaging/addressBook",
       },
     ],
   },
@@ -51,17 +51,17 @@ export const sampleSideBarSections = [
       {
         icon: <BarChartOutlined />,
         label: "Reports",
-        link: "/misc",
+        link: "/dashboard/misc/reports",
       },
       {
         icon: <MoneyCollectOutlined />,
         label: "Payment",
-        link: "/misc/payment",
+        link: "/dashboard/misc/payment",
       },
       {
         icon: <DesktopOutlined />,
         label: "API",
-        link: "/misc/api",
+        link: "/dashboard/misc/api",
       },
     ],
   },
@@ -71,7 +71,7 @@ export const sampleSideBarSections = [
       {
         icon: <InboxOutlined />,
         label: "Profile",
-        link: "/profile",
+        link: "/dashboard/profile",
       },
     ],
   },

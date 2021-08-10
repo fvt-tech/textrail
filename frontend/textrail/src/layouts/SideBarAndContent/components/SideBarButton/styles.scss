@@ -21,3 +21,11 @@
     -moz-box-shadow: 1px 9px 20px 4px rgba(0, 0, 0, 0.19);
   }
 }
+.active {
+  background-color: slateblue;
+  width: 85%;
+  color: white;
+  box-shadow: 1px 7px 20px 4px rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 1px 9px 20px 4px rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 1px 9px 20px 4px rgba(0, 0, 0, 0.19);
+}

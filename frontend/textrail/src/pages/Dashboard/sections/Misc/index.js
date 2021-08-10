@@ -9,7 +9,7 @@ const MiscSection = (props) => {
     <Switch>
       <Route path={`${props.route}/api`} component={API} />
       <Route path={`${props.route}/payment`} component={Payment} />
-      <Route exact path={props.route} component={Reports}/>
+      <Route exact path={`${props.route}/reports`} component={Reports}/>
     </Switch>
   );
 };

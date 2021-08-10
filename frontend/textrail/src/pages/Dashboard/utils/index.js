@@ -6,22 +6,22 @@ export const DashboardMainContent = [
   {
     name: "Dashboard",
     component: DashboardPage,
-    route: "/",
+    route: "/dashboard/home",
     exact: true,
   },
   {
     name: "Messaging",
     component: MessagingSection,
-    route: "/messaging",
+    route: "/dashboard/messaging",
   },
   {
     name: "Misc",
     component: MiscSection,
-    route: "/misc",
+    route: "/dashboard/misc",
   },
   {
     name: "My Account",
     component: Profile,
-    route: "/profile",
+    route: "/dashboard/profile",
   },
 ];
