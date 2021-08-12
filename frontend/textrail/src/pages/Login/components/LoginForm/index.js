@@ -16,7 +16,7 @@ const LoginForm = () => {
     alert(response.status);
   };
   return (
-    <div className="loginForm" >
+    <div className="loginForm">
       <h2>Login</h2>
       <Form layout="vertical" onFinish={handleUserLogin}>
         <Form.Item label="Email">
