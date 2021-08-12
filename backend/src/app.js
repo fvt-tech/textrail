@@ -8,6 +8,7 @@ const { NotFoundError } = require("./helpers/errors")
 const { authRouter, homeRouter } = require('./routes')
 const session = require( 'express-session')
 const passportLocal = require('./services/passport/passport-local')
+const cors = require('cors')
 
 config()
 
@@ -16,6 +17,7 @@ if (["development", "production"].includes(process.env.NODE_ENV)) {
     app.use(logger("dev"));
     app.use(logger('prod'))
 }
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
