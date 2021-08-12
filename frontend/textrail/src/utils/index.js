@@ -30,7 +30,7 @@ export const sampleSideBarSections = [
       },
       {
         icon: <ClockCircleOutlined />,
-        label: "Scheduled SMS",
+        label: "SMS Campaigns",
         link: "/dashboard/messaging/scheduled",
       },
       {
