@@ -1,6 +1,6 @@
 import { Button, Form, Input } from "antd";
 import React, { useState } from "react";
-import { textrailLogin } from "../../../../functions";
+import { textrailLogin } from "../../../../functions/auth";
 import "./styles.scss";
 const LoginForm = () => {
   const [user, setUser] = useState({

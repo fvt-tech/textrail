@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input } from "antd";
 import "./styles.scss";
-import { textrailSignup } from "../../../../functions";
+import { textrailSignup } from "../../../../functions/auth";
 const SignUpForm = () => {
   const [user, setUser] = useState({
     name: "",
