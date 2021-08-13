@@ -8,7 +8,11 @@ const groupSchema = mongoose.Schema({
     contacts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contact'
-    }]
-})
+    }],
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
+}, {timestamps: true})
 
 module.exports = groupSchema
