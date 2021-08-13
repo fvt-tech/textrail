@@ -8,7 +8,7 @@ const AddAGroup = () => {
     console.log(groupName);
   };
   return (
-    <div>
+    <div style={{margin:'0px 6px'}}>
       <Button onClick={() => setVisible(true)}>Add A Group</Button>
       <Modal
         onCancel={() => setVisible(false)}

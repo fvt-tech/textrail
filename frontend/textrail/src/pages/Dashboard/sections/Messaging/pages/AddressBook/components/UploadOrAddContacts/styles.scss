@@ -1,0 +1,19 @@
+.addContactForm {
+  display: flex;
+  flex-direction: column;
+    
+  .items:first-child{
+      margin-bottom: 10px;
+  }
+  .items{
+      margin-bottom: 2rem;
+  }
+}
+.fieldsHint{
+    color: gray;
+    margin: 6px;
+}
+.smallHints{
+    color: gray;
+    font-size: 12px;
+}
