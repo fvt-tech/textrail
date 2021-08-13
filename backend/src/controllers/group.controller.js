@@ -2,9 +2,9 @@ const Group = require('./../models/group.model')
 const Contact = require('./../models/contact.model')
 
 const getGroups = async (req, res) => {
-    const { client } = req.body
+    const { user } = req.body
     try {
-        const groups = await Group.find({ client }).populate('contacts')
+        const groups = await Group.find({ user }).populate('contacts')
         res.status(201).json({
             status: 'success',
             data: groups
@@ -35,20 +35,21 @@ const getGroup = async (req, res) => {
 }
 
 const addGroup = async (req, res) => {
-    const { name, contacts } = req.body
+    const { name, contacts, user } = req.body
     try {
         const nContacts = []
         contacts.forEach(async (item) => {
             const contact = new Contact({
                 name: item.name,
-                number: item.number
+                number: item.number,
             })
             await contact.save()
             nContacts.push(contact._id)
         });
         const group = new Group({
             name,
-            contacts: nContacts
+            contacts: nContacts,
+            user
         })
         await group.save()
         res.status(201).json({
@@ -113,7 +114,9 @@ const addContactToGroup = async (req, res) => {
                 data: group
             })
         }
-        group.contacts.push(contact)
+        const nContact = new Contact(contact)
+        await nContact.save()
+        group.contacts.push(nContact._id)
         res.status(201).json({
             status: 'Addition successful',
             data: group

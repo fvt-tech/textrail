@@ -2,6 +2,7 @@ const { Router } = require('express')
 const homeRouter = Router()
 const { addGroup, getGroup, getGroups, editGroup, delGroup, addContactToGroup } = require('./../controllers/group.controller')
 const { getContact, getContacts, addContact, editContact, delContact } = require('./../controllers/contact.controller')
+const { addSenderId, getSenderIds, delSenderId, editSenderId } = require('./../controllers/sender.controller')
 const authenticate = require('./../middleware/authenticate')
 
 homeRouter.get('/', (req, res) => {
@@ -21,4 +22,10 @@ homeRouter.post('/getGroups', authenticate, getGroups)
 homeRouter.post('/editGroup', authenticate, editGroup)
 homeRouter.delete('/delGroup', authenticate, delGroup)
 homeRouter.post('/addContactToGroup', authenticate, addContactToGroup)
+
+//sender
+homeRouter.post('/addSenderId', authenticate, addSenderId)
+homeRouter.post('/editSenderId', authenticate, editSenderId)
+homeRouter.post('/getSenderIds', authenticate, getSenderIds)
+homeRouter.delete('/delSenderId', authenticate, delSenderId)
 module.exports = homeRouter

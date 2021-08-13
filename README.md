@@ -8,3 +8,4 @@ An sms gateway application for trails 247 crm.
 # GET /auth/logout for logging a user out
 # /addGroup, /getGroup, /getGroups, /editGroup, DELETE /delGroup, /addContactToGroup
 # /addContact, /getContact, /getContacts, /editContact, DELETE /delContact
+# /addSenderID, /getSenderIds, /editSenderId, DELETE /delSenderId

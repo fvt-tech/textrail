@@ -17,7 +17,10 @@ if (["development", "production"].includes(process.env.NODE_ENV)) {
     app.use(logger("dev"));
     app.use(logger('prod'))
 }
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:3000'],
+    credentials: true
+}))
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
