@@ -3,6 +3,7 @@ const homeRouter = Router()
 const { addGroup, getGroup, getGroups, editGroup, delGroup, addContactToGroup } = require('./../controllers/group.controller')
 const { getContact, getContacts, addContact, editContact, delContact } = require('./../controllers/contact.controller')
 const { addSenderId, getSenderIds, delSenderId, editSenderId } = require('./../controllers/sender.controller')
+const { addCampaign, getCampaign, getCampaigns, editCampaign, delCampaign }
 const authenticate = require('./../middleware/authenticate')
 
 homeRouter.get('/', (req, res) => {
@@ -28,4 +29,11 @@ homeRouter.post('/addSenderId', authenticate, addSenderId)
 homeRouter.post('/editSenderId', authenticate, editSenderId)
 homeRouter.post('/getSenderIds', authenticate, getSenderIds)
 homeRouter.delete('/delSenderId', authenticate, delSenderId)
+
+//campaigns
+homeRouter.post('/addCampaign', addCampaign)
+homeRouter.post('/getCampaign', getCampaign)
+homeRouter.post('/getCampaigns', getCampaigns)
+homeRouter.post('/editCampaign', editCampaign)
+homeRouter.delete('/delCampaign', delCampaign)
 module.exports = homeRouter
