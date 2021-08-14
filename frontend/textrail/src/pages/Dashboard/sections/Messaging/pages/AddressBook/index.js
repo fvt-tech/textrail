@@ -6,10 +6,10 @@ import AddContactsToGroup from "./components/UploadOrAddContacts";
 import './styles.scss'
 import { textrailGetGroups } from "../../../../../../functions/groups";
 const AddressBook = () => {
-  // useEffect(() => {
-  //   textrailGetGroups()
+  useEffect(() => {
+    textrailGetGroups()
 
-  // }, [])
+  }, [])
   return (
     <div className="dashboardPage">
       <h1>Address Book</h1>
