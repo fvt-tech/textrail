@@ -9,7 +9,7 @@ const Dashboard = () => {
       <SideBarAndContentLayout>
         <Switch>
           {DashboardMainContent.map((item) => (
-            <Route path={item.route} exact={item.exact}>
+            <Route key={item.route} path={item.route} exact={item.exact}>
               {typeof item.component !== "string" ? (
                 <item.component {...item} />
               ) : (
