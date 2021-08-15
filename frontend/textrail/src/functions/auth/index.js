@@ -3,16 +3,17 @@ import { API_AUTH_URL } from "../../constants";
 
 //Textrail Login
 export const textrailLogin = async (user) => {
-  const response = await axios.post(`${API_AUTH_URL}/login`, user,{ withCredentials: true });
-  console.log(response.data)
+  const response = await axios.post(`${API_AUTH_URL}/login`, user, { withCredentials: true });
+  localStorage.setItem('user', JSON.stringify(response.data))
   return response;
 };
 // Textrail SignUp
 export const textrailSignup = async (user) => {
-  const response = await axios.post(`${API_AUTH_URL}/signup`, user,{ withCredentials: true });
+  const response = await axios.post(`${API_AUTH_URL}/signup`, user, { withCredentials: true });
+  localStorage.setItem('user', JSON.stringify(response.data))
   return response;
 };
 // Textrail Logout
 export const textrailLogout = async () => {
-  await axios.get(`${API_AUTH_URL}/logout`,{ withCredentials: true });
+  await axios.get(`${API_AUTH_URL}/logout`, { withCredentials: true });
 };
