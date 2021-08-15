@@ -73,7 +73,7 @@ const AddressBookActions = ({ groups, onChange }) => {
         ))}
       </Select>
       <AddAGroup />
-      <AddContactsToGroup />
+      <AddContactsToGroup groups={groups} />
     </div>
   );
 };
