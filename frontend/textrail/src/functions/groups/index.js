@@ -3,16 +3,24 @@ import { API_BASE_URL } from "../../constants";
 
 //Get all groups
 export const textrailGetGroups = async (user) => {
-  const response = await axios.post(`${API_BASE_URL}getGroups`, {user}, {
-    withCredentials: true,
-  });
+  const response = await axios.post(
+    `${API_BASE_URL}getGroups`,
+    { user },
+    {
+      withCredentials: true,
+    }
+  );
   return response.data;
 };
 //Get a group
-export const textrailGetGroup = async (user,id) => {
-  const response = await axios.post(`${API_BASE_URL}getGroup`, {user,id}, {
-    withCredentials: true,
-  });
+export const textrailGetGroup = async (user, id) => {
+  const response = await axios.post(
+    `${API_BASE_URL}getGroup`,
+    { user, id },
+    {
+      withCredentials: true,
+    }
+  );
   console.log(response.data);
   return response;
 };
@@ -40,6 +48,14 @@ export const textrailDeleteGroup = async () => {
 };
 
 //Add contacts to a group
-export const textrailAddContactsToGroup=()=>{
-
-}
+export const textrailAddContactsToGroup =async (id, contact) => {
+  const response = await axios.post(
+    `${API_BASE_URL}addContactToGroup`,
+    { id, contact },
+    {
+      withCredentials: true,
+    }
+  );
+  console.log(response.data);
+  return response;
+};
