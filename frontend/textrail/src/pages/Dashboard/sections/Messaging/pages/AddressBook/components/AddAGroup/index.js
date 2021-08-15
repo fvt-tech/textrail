@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
+import { textrailAddGroup } from '../../../../../../../../functions/groups'
 const AddAGroup = () => {
   const [visible, setVisible] = useState(false);
-  const [groupName, setGroupName] = useState("");
-  const handleChange = (e) => {
-    setGroupName(e.target.value);
-    console.log(groupName);
-  };
+
   return (
-    <div style={{margin:'0px 6px'}}>
+    <div style={{ margin: '0px 6px' }}>
       <Button onClick={() => setVisible(true)}>Add A Group</Button>
       <Modal
         onCancel={() => setVisible(false)}
@@ -16,7 +13,7 @@ const AddAGroup = () => {
         visible={visible}
         footer=""
       >
-        <AddGroupForm groupName={groupName} onChange={handleChange} />
+        <AddGroupForm />
       </Modal>
     </div>
   );
@@ -24,13 +21,29 @@ const AddAGroup = () => {
 
 export default AddAGroup;
 // The form for creating a new group
-const AddGroupForm = ({ groupName, onChange }) => {
+const AddGroupForm = () => {
+  const [groupName, setGroupName] = useState("");
+  const { data: user } = JSON.parse(localStorage.getItem("user"))
+  console.log('The user', user)
+  const handleChange = (e) => {
+    setGroupName(e.target.value);
+    console.log(groupName);
+  };
+  const handleAddGroup = async () => {
+    const group = {
+      name: groupName,
+      contacts:[],
+      user: user._id
+    }
+    const response = await textrailAddGroup(group)
+    alert(response)
+  }
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" onFinish={handleAddGroup}>
       <Form.Item label="Group Name">
         <Input
           size="large"
-          onChange={onChange}
+          onChange={handleChange}
           value={groupName}
           placeholder="Enter name of the Group"
         />
