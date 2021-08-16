@@ -116,7 +116,10 @@ const addContactToGroup = async (req, res) => {
         }
         const nContact = new Contact(contact)
         await nContact.save()
+
         group.contacts.push(nContact._id)
+        await group.save()
+
         res.status(201).json({
             status: 'Addition successful',
             data: group
