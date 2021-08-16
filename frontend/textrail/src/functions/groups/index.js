@@ -33,22 +33,31 @@ export const textrailAddGroup = async (group) => {
   return response;
 };
 //Edit a group
-export const textrailEditGroup = async () => {
-  const response = await axios.post(`${API_BASE_URL}getGroups`, null, {
-    withCredentials: true,
-  });
+export const textrailEditGroup = async (id, update) => {
+  const response = await axios.post(
+    `${API_BASE_URL}editCampaign`,
+    { id, update },
+    {
+      withCredentials: true,
+    }
+  );
   console.log(response.data);
+  return response;
 };
 //Delete a group
-export const textrailDeleteGroup = async () => {
-  const response = await axios.post(`${API_BASE_URL}delete`, null, {
-    withCredentials: true,
-  });
+export const textrailDeleteGroup = async (id) => {
+  const response = await axios.post(
+    `${API_BASE_URL}delGroup`,
+    { id },
+    {
+      withCredentials: true,
+    }
+  );
   console.log(response.data);
 };
 
 //Add contacts to a group
-export const textrailAddContactsToGroup =async (id, contact) => {
+export const textrailAddContactsToGroup = async (id, contact) => {
   const response = await axios.post(
     `${API_BASE_URL}addContactToGroup`,
     { id, contact },
