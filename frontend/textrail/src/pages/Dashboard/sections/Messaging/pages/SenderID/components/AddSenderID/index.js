@@ -36,7 +36,7 @@ const AddSenderID = ({ user }) => {
           />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit">
+          <Button className='myPrimaryButton' type="primary" htmlType="submit">
             Create
           </Button>
         </Form.Item>
