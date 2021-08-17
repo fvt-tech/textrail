@@ -1,4 +1,16 @@
 .addressBookActions{
     display: flex;
+}
+.groupListItem{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
 
+    span:first-child{
+    font-weight: 500;
+
+    &::after{
+        content:"-";
+    }
+    }
 }

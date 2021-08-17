@@ -3,10 +3,13 @@ import "./styles.scss";
 const DashboardCard = ({ children, title, actions }) => {
   return (
     <div className="dashboardCard">
-      <div className="cardTitle">
-        {title && <span>{title}</span>}
-        {actions && <div>{actions}</div>}
-      </div>
+      {title ||
+        (actions && (
+          <div className="cardTitle">
+            {title && <span>{title}</span>}
+            {actions && <div>{actions}</div>}
+          </div>
+        ))}
       {children}
     </div>
   );

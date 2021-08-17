@@ -3,6 +3,7 @@ import { API_BASE_URL } from "../../constants";
 
 //Get all groups
 export const textrailGetGroups = async (user) => {
+  console.log(user);
   const response = await axios.post(
     `${API_BASE_URL}getGroups`,
     { user },
