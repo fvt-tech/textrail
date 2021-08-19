@@ -4,6 +4,7 @@ const { addGroup, getGroup, getGroups, editGroup, delGroup, addContactToGroup } 
 const { getContact, getContacts, addContact, editContact, delContact } = require('./../controllers/contact.controller')
 const { addSenderId, getSenderIds, delSenderId, editSenderId } = require('./../controllers/sender.controller')
 const { addCampaign, getCampaign, getCampaigns, editCampaign, delCampaign } = require('./../controllers/campaign.controller')
+const { addTemplate, getTemplate, getTemplates, delTemplate, editTemplate } = require('./../controllers/template.controller')
 const authenticate = require('./../middleware/authenticate')
 
 homeRouter.get('/', (req, res) => {
@@ -36,4 +37,11 @@ homeRouter.post('/getCampaign', getCampaign)
 homeRouter.post('/getCampaigns', getCampaigns)
 homeRouter.post('/editCampaign', editCampaign)
 homeRouter.delete('/delCampaign', delCampaign)
+
+//templates
+homeRouter.post('/addTemplate', addTemplate)
+homeRouter.post('/getTemplate', getTemplate)
+homeRouter.post('/getTemplates', getTemplates)
+homeRouter.post('/editTemplate', editTemplate)
+homeRouter.delete('/delTemplate', delTemplate)
 module.exports = homeRouter
