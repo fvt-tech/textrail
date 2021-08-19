@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "antd";
 import { API_BASE_URL } from "../../constants";
 
 //Get all Campaigns
@@ -27,15 +28,21 @@ export const textrailGetCampaign = async (id) => {
 //Add a Campaign
 export const textrailAddCampaign = async (campaign) => {
   const { name, date, user, frequency } = campaign;
-  const response = await axios.post(
-    `${API_BASE_URL}addCampaign`,
-    { name, date, user, frequency },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
-  return response;
+  await axios
+    .post(
+      `${API_BASE_URL}addCampaign`,
+      { name, date, user, frequency },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Campaign Created Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
 //Edit a Campaign
 export const textrailEditCampaign = async (id, update) => {

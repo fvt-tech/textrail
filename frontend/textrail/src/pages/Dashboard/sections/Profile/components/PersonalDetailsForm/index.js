@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Form, Input, Row, Col, Button } from "antd";
 const PersonalDetailsForm = () => {
-  const [user, setUser] = useState({});
+  const [mainUser, setMainUser] = useState({});
   useEffect(() => {
     const {
-      data: { user: current_user },
+      data:  user
     } = JSON.parse(localStorage.getItem("user"));
-    console.log(current_user);
-    setUser(current_user);
+    console.log(user);
+    setMainUser(user);
   }, []);
   return (
     <Form layout="vertical" style={{marginTop:'1rem'}}>
@@ -15,7 +15,7 @@ const PersonalDetailsForm = () => {
         <Col md={12} xs={24}>
             <div style={{padding:'0px 8px'}}>
             <Form.Item label="Username">
-            <Input readOnly value={user.username} disabled />
+            <Input readOnly value={mainUser.username} disabled />
           </Form.Item>  
             </div>
        
@@ -23,7 +23,7 @@ const PersonalDetailsForm = () => {
         <Col md={12} xs={24}>
         <div style={{padding:'0px 8px'}}>
           <Form.Item label="Name">
-            <Input value={user.name} />
+            <Input value={mainUser.name} />
           </Form.Item>
           </div>
         </Col>
@@ -32,14 +32,14 @@ const PersonalDetailsForm = () => {
         <Col md={12} xs={24}>
         <div style={{padding:'0px 8px'}}>
           <Form.Item label="Company">
-            <Input value={user.company} />
+            <Input value={mainUser.company} />
           </Form.Item>
           </div>
         </Col>
         <Col md={12} xs={24}>
         <div style={{padding:'0px 8px'}}>
           <Form.Item label="Email">
-            <Input value={user.email} />
+            <Input value={mainUser.email} />
           </Form.Item>
           </div>
         </Col>

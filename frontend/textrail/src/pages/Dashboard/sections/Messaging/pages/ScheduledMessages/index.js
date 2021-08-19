@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Empty } from "antd";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import CampaignList from "./components/CampaignList";
@@ -10,9 +10,9 @@ const ScheduledMessages = () => {
   //Get all sender ids
   useEffect(() => {
     const getCampaigns = async () => {
-      const {data:{user:current_user} } = JSON.parse(localStorage.getItem("user"));
-      setMainUser(current_user);
-      const response = await textrailGetCampaigns(current_user._id);
+      const { data: user } = JSON.parse(localStorage.getItem("user"));
+      setMainUser(user);
+      const response = await textrailGetCampaigns(user._id);
       console.log(response);
       setCampaigns(response.data);
     };

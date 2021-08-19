@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "antd";
 import { API_BASE_URL } from "../../constants";
 
 //Get all groups
@@ -27,11 +28,17 @@ export const textrailGetGroup = async (user, id) => {
 };
 //Add a group
 export const textrailAddGroup = async (group) => {
-  const response = await axios.post(`${API_BASE_URL}addGroup`, group, {
-    withCredentials: true,
-  });
-  console.log(response.data);
-  return response;
+  await axios
+    .post(`${API_BASE_URL}addGroup`, group, {
+      withCredentials: true,
+    })
+    .then((response) => {
+      message.success("Group Created Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
 //Edit a group
 export const textrailEditGroup = async (id, update) => {
@@ -59,13 +66,19 @@ export const textrailDeleteGroup = async (id) => {
 
 //Add contacts to a group
 export const textrailAddContactsToGroup = async (id, contact) => {
-  const response = await axios.post(
-    `${API_BASE_URL}addContactToGroup`,
-    { id, contact },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
-  return response;
+  await axios
+    .post(
+      `${API_BASE_URL}addContactToGroup`,
+      { id, contact },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Contacts Added Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };

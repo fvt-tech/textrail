@@ -12,9 +12,9 @@ const AddressBook = () => {
   //Fetching all the groups from the database
   useEffect(() => {
     const getGroups = async () => {
-      const { data:{user:current_user} } = JSON.parse(localStorage.getItem("user"));
-      console.log(current_user)
-      const response = await textrailGetGroups(current_user._id);
+      const { data: user } = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      const response = await textrailGetGroups(user._id);
       console.log(response.data);
       setGroups(response.data);
     };
@@ -40,10 +40,10 @@ const AddressBook = () => {
         <List
           dataSource={groupContacts}
           bordered
-          header='Contacts'
+          header="Contacts"
           renderItem={(item) => (
             <List.Item>
-              <div className='groupListItem'>
+              <div className="groupListItem">
                 <span>{item.name}</span>
                 <span>{item.number}</span>
               </div>

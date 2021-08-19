@@ -7,15 +7,15 @@ import { textrailGetSenderIDs } from "../../../../../../functions/senderID";
 
 const SenderIDs = () => {
   const [senderIds, setSenderIds] = useState([]);
-  const [user, setUser] = useState();
+  const [mainUser, setMainUser] = useState();
   //Get all sender ids
   useEffect(() => {
     const getSenderIds = async () => {
       const {
-        data: { user: current_user },
+        data:user
       } = JSON.parse(localStorage.getItem("user"));
-      setUser(current_user);
-      const response = await textrailGetSenderIDs(current_user._id);
+      setMainUser(user);
+      const response = await textrailGetSenderIDs(user._id);
       console.log(response);
       // setSenderIds(response.data)
     };
@@ -25,7 +25,7 @@ const SenderIDs = () => {
     <div className="dashboardPage">
       <h1>Sender IDs</h1>
       <DashboardCard>
-        <AddSenderID user={user} />
+        <AddSenderID user={mainUser} />
         <SenderIDList list={senderIds} />
       </DashboardCard>
     </div>

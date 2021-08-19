@@ -88,8 +88,7 @@ const AddOneContactForm = ({ group }) => {
   };
   //Handling contact addition to groups
   const handleAddContactToGroup = async () => {
-    const response = await textrailAddContactsToGroup(group, contact);
-    console.log(response.data);
+    await textrailAddContactsToGroup(group, contact);
   };
   return (
     <Form layout="vertical" onFinish={handleAddContactToGroup}>
