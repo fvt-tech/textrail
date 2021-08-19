@@ -12,8 +12,7 @@ const LoginForm = () => {
     console.log(user);
   };
   const handleUserLogin = async () => {
-    const response = await textrailLogin(user);
-    alert(response.status);
+    await textrailLogin(user);
   };
   return (
     <div className="loginForm">

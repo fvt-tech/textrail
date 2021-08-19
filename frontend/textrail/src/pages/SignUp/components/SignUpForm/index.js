@@ -16,8 +16,7 @@ const SignUpForm = () => {
     console.log(user);
   };
   const handleUserSignup = async () => {
-    const response = await textrailSignup(user);
-    alert(response.status);
+    await textrailSignup(user);
   };
   return (
     <Form className="signUpForm" layout="vertical" onFinish={handleUserSignup}>
