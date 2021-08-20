@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const templateSchema = mongoose.Schema({
+    name: {
+        type: String
+    },
     message: {
         type: String,
         required: [true, 'template required message']

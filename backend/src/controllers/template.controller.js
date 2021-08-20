@@ -1,9 +1,10 @@
 const Template = require('./../models/template.model')
 
 const addTemplate = async (req, res) => {
-    const { message, user } = req.body
+    const { name, message, user } = req.body
     try {
         const temp = new Template({
+            name,
             user,
             message
         })
