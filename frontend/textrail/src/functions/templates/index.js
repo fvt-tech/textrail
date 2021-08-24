@@ -41,16 +41,22 @@ export const textrailAddTemplate = async (template) => {
     .catch((error) => message.error(error.message));
 };
 //Edit a Template
-export const textrailEditTemplate = async (id, message) => {
-  const response = await axios.post(
-    `${API_BASE_URL}editCampaign`,
-    { id, message },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
-  return response;
+export const textrailEditTemplate = async (body) => {
+  await axios
+    .post(
+      `${API_BASE_URL}editTemplate`,
+      body,
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Edited Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
 //Delete a Template
 export const textrailDeleteTemplate = async (id) => {

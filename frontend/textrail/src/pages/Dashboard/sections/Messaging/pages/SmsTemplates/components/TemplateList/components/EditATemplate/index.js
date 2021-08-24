@@ -1,17 +1,21 @@
 import React,{useState} from "react";
-
-const EditTemplate = ({visible}) => {
-    const [template, setTemplate] = useState({
-        name: "",
-        message: "",
+import {Modal,Form,Input,Button} from "antd"
+import { textrailEditTemplate } from "../../../../../../../../../../functions/templates";
+const EditTemplate = ({visible,template,onChange}) => {
+    const {message}=template;
+    const [update, setUpdate] = useState({
+        message: message,
       });
       //Handler for form field changes
       const handleChange = (e, fieldname) =>
-        setTemplate({ ...template, [fieldname]: e.target.value });
-      //Handler for adding templates
-      const handleAddTemplate = async () => {
-        const { data: user } = JSON.parse(localStorage.getItem("user"));
-        await textrailAddTemplate({ ...template, user: user._id });
+        setUpdate({ ...template, [fieldname]: e.target.value });
+      //Handler for editinging templates
+      const handleEditTemplate = async () => {
+          const body={
+              id:template._id,
+              message:update.message
+          }
+        await textrailEditTemplate(body);
       };
   return (
     <Modal
@@ -19,19 +23,22 @@ const EditTemplate = ({visible}) => {
       title="Message Template"
       visible={visible}
       footer=""
+      onCancel={onChange}
     >
-      <Form layout="vertical" onFinish={handleAddTemplate}>
+      <Form layout="vertical" onFinish={handleEditTemplate}>
         <Form.Item label="Reference Name">
           <Input
             placeholder="Enter template name"
             value={template.name}
+            readOnly
+            disabled
             onChange={(e) => handleChange(e, "name")}
           />
         </Form.Item>
         <Form.Item label="SMS Template">
           <Input.TextArea
             placeholder="Enter template message"
-            value={template.message}
+            value={update.message}
             onChange={(e) => handleChange(e, "message")}
           />
         </Form.Item>

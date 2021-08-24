@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { List, Skeleton, Modal, Button } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { textrailDeleteTemplate } from "../../../../../../../../functions/templates";
+import EditTemplate from "./components/EditATemplate";
 
 const TemplateList = ({ list }) => {
   const [loading, setLoading] = useState(true);
@@ -53,11 +54,11 @@ const TemplateListItem = ({ item, loading }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   return (
     <>
-      {/* <EditCampaign
+      <EditTemplate
         visible={showEditModal}
-        campaign={item}
+        template={item}
         onChange={() => setShowEditModal(false)}
-      /> */}
+      />
       <List.Item
         actions={[
           <Button size="small" onClick={() => setShowEditModal(true)}>
@@ -75,8 +76,10 @@ const TemplateListItem = ({ item, loading }) => {
       >
         <Skeleton loading={loading} title={false} active>
           <List.Item.Meta
+            onClick={() => setShowEditModal(true)}
             style={{ textTransform: "capitalize" }}
-            title={item.message}
+            title={item.name}
+            description={item.message}
           />
         </Skeleton>
       </List.Item>
