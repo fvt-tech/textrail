@@ -46,24 +46,37 @@ export const textrailAddCampaign = async (campaign) => {
 };
 //Edit a Campaign
 export const textrailEditCampaign = async (id, update) => {
-  const response = await axios.post(
-    `${API_BASE_URL}editCampaign`,
-    { id, update },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
-  return response;
+  await axios
+    .post(
+      `${API_BASE_URL}editCampaign`,
+      { id, update },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Campaign Edited Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
 //Delete a Campaign
 export const textrailDeleteCampaign = async (id) => {
-  const response = await axios.delete(
-    `${API_BASE_URL}delCampaign`,
-    { id },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
+  await axios
+    .delete(
+      `${API_BASE_URL}delCampaign`,
+      { id },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Deleting Campaign");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };

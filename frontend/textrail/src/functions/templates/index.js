@@ -54,12 +54,19 @@ export const textrailEditTemplate = async (id, message) => {
 };
 //Delete a Template
 export const textrailDeleteTemplate = async (id) => {
-  const response = await axios.post(
-    `${API_BASE_URL}delTemplate`,
-    { id },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
+  await axios
+    .delete(
+      `${API_BASE_URL}delTemplate`,
+      { id },
+      {
+        withCredentials: true,
+      }
+    )
+    .then((response) => {
+      message.success("Deleting SMS Template");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };

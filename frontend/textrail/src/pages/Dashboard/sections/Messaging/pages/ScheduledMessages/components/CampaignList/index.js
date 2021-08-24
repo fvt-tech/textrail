@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { List, Skeleton } from "antd";
+import { Button, List, Modal, Skeleton } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { textrailDeleteCampaign } from "../../../../../../../../functions/campaigns";
+import EditCampaign from "./components/EditACampaign";
 
 const CampaignList = ({ list }) => {
   const [loading, setLoading] = useState(true);
-  console.log(list)
+
+  console.log(list);
   useEffect(() => {
     setInterval(() => {
       setLoading(false);
@@ -16,7 +19,6 @@ const CampaignList = ({ list }) => {
       className="demo-loadmore-list"
       itemLayout="horizontal"
       dataSource={list}
-      //   bordered
       header={
         <span
           style={{
@@ -29,20 +31,55 @@ const CampaignList = ({ list }) => {
           All Campaigns
         </span>
       }
-      renderItem={(item) => (
-        <List.Item
-          actions={[
-            <EditOutlined style={{ fontSize: "23px" }} />,
-            <DeleteOutlined style={{ fontSize: "23px", color: "#E9967A" }} />,
-          ]}
-        >
-          <Skeleton loading={loading} title={false} active>
-            <List.Item.Meta style={{textTransform:'capitalize'}} title={item.name} />
-          </Skeleton>
-        </List.Item>
-      )}
+      renderItem={(item) => <CampaignListItem item={item} loading={loading} />}
     />
   );
 };
 
 export default CampaignList;
+
+// THis is the component for a campaign list item
+const CampaignListItem = ({ item, loading }) => {
+  const deleteItem = (item) => {
+    Modal.error({
+      title: "Are you sure you want to delete this campaign",
+      okCancel: true,
+      onOk: async () => {
+        await textrailDeleteCampaign(item);
+      },
+    });
+  };
+  const [showEditModal, setShowEditModal] = useState(false);
+  return (
+    <>
+      <EditCampaign
+        visible={showEditModal}
+        campaign={item}
+        onChange={() => setShowEditModal(false)}
+      />
+      <List.Item
+        actions={[
+          <Button size="small"  onClick={() => setShowEditModal(true)}>
+            Edit
+          </Button>,
+          <Button
+            type="primary"
+            size="small"
+            danger
+            onClick={() => deleteItem(item._id)}
+          >
+            Delete
+          </Button>,
+        ]}
+      >
+        <Skeleton loading={loading} title={false} active>
+          <List.Item.Meta
+            onClick={() => setShowEditModal(true)}
+            style={{ textTransform: "capitalize" }}
+            title={item.name}
+          />
+        </Skeleton>
+      </List.Item>
+    </>
+  );
+};
