@@ -1,15 +1,19 @@
-import React, { useState } from "react";
-import { Button, Form, Input, Modal, Radio, Select } from "antd";
+import React, { useEffect, useState } from "react";
+import { Button, Form, Input, message, Modal, Radio, Select } from "antd";
 import "./styles.scss";
-import {  UserAddOutlined} from '@ant-design/icons'
+import { UserAddOutlined } from "@ant-design/icons";
 import { textrailAddContactsToGroup } from "../../../../../../../../functions/groups";
+import xlsxParser from "xlsx-parse-json";
 const { Option } = Select;
 //This is the button and modal the realises adding a contact to a group or uploading a file of contacts
 const AddContactsToGroup = ({ groups }) => {
   const [visible, setVisible] = useState(false);
   return (
     <div style={{ margin: "0px 6px" }}>
-      <Button onClick={() => setVisible(true)}><UserAddOutlined/>Add or Upload Contacts</Button>
+      <Button onClick={() => setVisible(true)}>
+        <UserAddOutlined />
+        Add or Upload Contacts
+      </Button>
       <Modal
         onCancel={() => setVisible(false)}
         title="Add or Upload Contacts to a Group"
@@ -69,7 +73,7 @@ const AddContactForm = ({ list = dummyGroupList }) => {
           {radioType === "single" ? (
             <AddOneContactForm group={group} />
           ) : (
-            <UploadContacts />
+            <UploadContacts group={group} />
           )}
         </>
       )}
@@ -116,9 +120,37 @@ const AddOneContactForm = ({ group }) => {
   );
 };
 //This is the file upload form
-const UploadContacts = () => {
+const UploadContacts = ({ group }) => {
+  const [file, setFile] = useState({});
+  const [contact, setContact] = useState([]);
+
+  //Converting the file to an array of contacts
+  const handleContacts = (file) => {
+    console.log(file);
+    xlsxParser.onFileSelection(file).then((data) => {
+      var parsedData = data;
+      const newContacts = [];
+      parsedData.Sheet1.map((item) => {
+        let newArray = Object.values(item);
+        console.log(newArray);
+        let newObj = { name: newArray[0], number: newArray[1] };
+        newContacts.push(newObj);
+      });
+      setContact(newContacts);
+    });
+  };
+
+  // Handling the contacts upload into the group
+  const handleAddContactToGroup = async () => {
+    if (contact.length > 0) {
+      await textrailAddContactsToGroup(group, contact);
+    } else {
+      message.error("Please Choose A File")
+    }
+  };
+
   return (
-    <Form layout="vertical">
+    <Form layout="vertical" onFinish={handleAddContactToGroup}>
       <Form.Item
         label={
           <>
@@ -127,7 +159,11 @@ const UploadContacts = () => {
           </>
         }
       >
-        <Input type="file" />
+        <Input
+          type="file"
+          accept=".xlsx,.xls"
+          onChange={(e) => handleContacts(e.target.files[0])}
+        />
         <label className="smallHints">
           Accepted Formats:.csv,.xls,.xlsx,.txt
         </label>
