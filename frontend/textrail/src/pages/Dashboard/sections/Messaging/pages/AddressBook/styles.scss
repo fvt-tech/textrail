@@ -8,9 +8,17 @@
 
     span:first-child{
     font-weight: 500;
-
-    &::after{
-        content:"-";
     }
+}
+.contactDrawerContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    span:nth-child(2){
+        font-size: 20px;
+        font-weight: 600;
+        margin: 0.5rem 0px;
+
     }
 }

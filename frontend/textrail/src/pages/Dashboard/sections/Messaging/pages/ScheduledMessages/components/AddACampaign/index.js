@@ -8,7 +8,7 @@ const { Option } = Select;
 const AddACampaign = ({ user }) => {
   const [visible, setVisible] = useState(false);
   return (
-    <div style={{ margin: "0px 6px" }}>
+    <div>
       <Button className="myPrimaryButton" onClick={() => setVisible(true)}>
         <PlusCircleOutlined />
         Add A Campaign

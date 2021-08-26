@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Empty } from "antd";
+import { Card } from "antd";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import CampaignList from "./components/CampaignList";
 import AddACampaign from "./components/AddACampaign";
@@ -21,9 +21,9 @@ const ScheduledMessages = () => {
   return (
     <div className="dashboardPage">
       <h1>SMS Campaigns</h1>
-      <DashboardCard actions={<AddACampaign user={mainUser._id} />}>
+      <Card title={<AddACampaign user={mainUser._id} />}>
         <CampaignList list={campaigns} />
-      </DashboardCard>
+      </Card>
     </div>
   );
 };

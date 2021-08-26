@@ -1,20 +1,20 @@
 import React from "react";
 import "./styles.scss";
-import { UserOutlined } from "@ant-design/icons";
+import { Card } from "antd";
+import { UserOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 import preview from "../../../../../../../../assets/previewBox.png";
 import Avatar from "antd/lib/avatar/avatar";
-const PreviewBox = ({ sender = "Sender ID", message = "Your message" }) => {
+const PreviewBox = ({ sender = "Sender ID", message = "Your message " }) => {
   return (
-    <div className="previewBox">
-      <img src={preview} />
+    <Card className="previewBox">
       <div className="heading">
-        <Avatar icon={<UserOutlined />} />
-        <span className='senderName'>{sender}</span>
+        <Avatar icon={<UserOutlined />} size="small" />
+        <span className="senderName">{sender}</span>
       </div>
-      <div className='content'>
-          <div className='message'>{message}</div>
+      <div className="content">
+        <div className="message">{message}</div>
       </div>
-    </div>
+    </Card>
   );
 };
 

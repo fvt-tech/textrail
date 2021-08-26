@@ -71,14 +71,14 @@ export const sampleSideBarSections = [
       },
     ],
   },
-  {
-    title: "My Account",
-    buttonList: [
-      {
-        icon: <InboxOutlined />,
-        label: "Profile",
-        link: "/dashboard/profile",
-      },
-    ],
-  },
+  // {
+  //   title: "My Account",
+  //   buttonList: [
+  //     {
+  //       icon: <InboxOutlined />,
+  //       label: "Profile",
+  //       link: "/dashboard/profile",
+  //     },
+  //   ],
+  // },
 ];

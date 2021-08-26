@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Empty, List, Select } from "antd";
+import { Drawer, List, Select, Avatar ,Card} from "antd";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import AddAGroup from "./components/AddAGroup";
+import { UserOutlined, EyeOutlined } from "@ant-design/icons";
 import AddContactsToGroup from "./components/UploadOrAddContacts";
 import "./styles.scss";
 import { textrailGetGroups } from "../../../../../../functions/groups";
+
 const { Option } = Select;
 const AddressBook = () => {
   const [groups, setGroups] = useState([]);
@@ -29,8 +31,8 @@ const AddressBook = () => {
   return (
     <div className="dashboardPage">
       <h1>Address Book</h1>
-      <DashboardCard
-        actions={
+      <Card
+        title={
           <AddressBookActions
             groups={groups}
             onChange={handleContactsForGroup}
@@ -39,23 +41,43 @@ const AddressBook = () => {
       >
         <List
           dataSource={groupContacts}
-          bordered
           header="Contacts"
-          renderItem={(item) => (
-            <List.Item>
-              <div className="groupListItem">
-                <span>{item.name}</span>
-                <span>{item.number}</span>
-              </div>
-            </List.Item>
-          )}
+          renderItem={(item) => <AddressListItem item={item} />}
         />
-      </DashboardCard>
+      </Card>
     </div>
   );
 };
 
 export default AddressBook;
+
+// Address List Item with drawer
+const AddressListItem = ({ item }) => {
+  const [showDrawer, setShowDrawer] = useState(false);
+  return (
+    <>
+      <Drawer
+        title="Contact Details"
+        visible={showDrawer}
+        placement="right"
+        width="min(100vw,400px)"
+        onClose={() => setShowDrawer(false)}
+      >
+        <div className="contactDrawerContent">
+          <Avatar size={100} icon={<UserOutlined />} />
+          <span>{item.name}</span>
+          <span>{item.number}</span>
+        </div>
+      </Drawer>
+      <List.Item
+        onClick={() => setShowDrawer(true)}
+        actions={[<EyeOutlined />]}
+      >
+        <span>{item.name}</span>
+      </List.Item>
+    </>
+  );
+};
 
 //All the actions for the address book page
 const AddressBookActions = ({ groups, onChange }) => {

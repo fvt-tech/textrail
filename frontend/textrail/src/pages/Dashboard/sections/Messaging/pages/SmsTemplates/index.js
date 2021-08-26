@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Empty } from "antd";
+import { Card } from "antd";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import AddNewTemplateButton from "./components/AddNewTemplateButton";
 import AddTemplateModal from "./components/AddTemplateModal";
@@ -21,9 +21,9 @@ const SmsTemplates = () => {
   return (
     <div className="dashboardPage">
       <h1>SMS Templates</h1>
-      <DashboardCard actions={<SmsTemplateAction />}>
+      <Card title={<SmsTemplateAction />}>
         <TemplateList list={templates} />
-      </DashboardCard>
+      </Card>
     </div>
   );
 };

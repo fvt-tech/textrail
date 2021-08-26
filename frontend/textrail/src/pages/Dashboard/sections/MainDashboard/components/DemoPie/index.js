@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Pie, G2 } from '@ant-design/charts';
 
-const DemoGeneral= () => {
+const DemoPie= () => {
   const { registerTheme } = G2;
   registerTheme('custom-theme', {
     colors10: ['#FACDAA', '#F4A49E', '#EE7B91', '#E85285', '#BE408C', '#BE408C'],
@@ -46,4 +46,4 @@ const DemoGeneral= () => {
   return <Pie {...config} style={{height:250}} />;
 };
 
-export default DemoGeneral;
+export default DemoPie;

@@ -1,3 +1,4 @@
+import { Card } from "antd";
 import React, {useState, useEffect } from "react";
 import DashboardCard from "../../../../components/DashboardCard";
 import Notifications from "./components/Notifications";
@@ -8,10 +9,10 @@ const Profile = () => {
   return (
     <div className="dashboardPage">
       <h1>Profile</h1>
-      <DashboardCard title="Personal Details">
+      <Card style={{margin:'1rem 0px 0px'}} title="Personal Details">
         <PersonalDetailsForm/>
-      </DashboardCard>
-      <DashboardCard title="Notifications"><Notifications/></DashboardCard>
+      </Card>
+      <Card style={{margin:'1rem 0px'}} title="Notifications"><Notifications/></Card>
     </div>
   );
 };

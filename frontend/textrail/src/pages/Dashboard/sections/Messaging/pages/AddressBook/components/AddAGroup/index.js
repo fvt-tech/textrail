@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Modal } from "antd";
+import { UsergroupAddOutlined } from "@ant-design/icons";
+
 import { textrailAddGroup } from "../../../../../../../../functions/groups";
 const AddAGroup = () => {
   const [visible, setVisible] = useState(false);
 
   return (
     <div style={{ margin: "0px 6px" }}>
-      <Button onClick={() => setVisible(true)}>Add A Group</Button>
+      <Button onClick={() => setVisible(true)}>
+        <UsergroupAddOutlined />
+        Add A Group
+      </Button>
       <Modal
         onCancel={() => setVisible(false)}
         title="Create a New Group"

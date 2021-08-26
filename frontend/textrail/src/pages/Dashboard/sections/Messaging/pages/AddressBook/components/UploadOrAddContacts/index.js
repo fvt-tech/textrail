@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input, Modal, Radio, Select } from "antd";
 import "./styles.scss";
+import {  UserAddOutlined} from '@ant-design/icons'
 import { textrailAddContactsToGroup } from "../../../../../../../../functions/groups";
 const { Option } = Select;
 //This is the button and modal the realises adding a contact to a group or uploading a file of contacts
@@ -8,7 +9,7 @@ const AddContactsToGroup = ({ groups }) => {
   const [visible, setVisible] = useState(false);
   return (
     <div style={{ margin: "0px 6px" }}>
-      <Button onClick={() => setVisible(true)}>Add or Upload Contacts</Button>
+      <Button onClick={() => setVisible(true)}><UserAddOutlined/>Add or Upload Contacts</Button>
       <Modal
         onCancel={() => setVisible(false)}
         title="Add or Upload Contacts to a Group"

@@ -4,36 +4,24 @@ import { Column } from "@ant-design/charts";
 const DemoColumn = () => {
   var data = [
     {
-      type: "Type 1",
+      type: "Sent Messages",
       sales: 38,
     },
     {
-      type: "Type 2",
+      type: "Failed Messages",
       sales: 52,
     },
     {
-      type: "Type 3",
+      type: "Sent Campaigns",
       sales: 61,
     },
     {
-      type: "Type 4",
+      type: "Notifications",
       sales: 145,
     },
     {
-      type: "Type 5",
+      type: "People Reach",
       sales: 48,
-    },
-    {
-      type: "Type 6",
-      sales: 38,
-    },
-    {
-      type: "Type 7",
-      sales: 38,
-    },
-    {
-      type: "Type 8",
-      sales: 38,
     },
   ];
   var config = {
@@ -55,7 +43,7 @@ const DemoColumn = () => {
     },
     meta: {
       type: { alias: "type" },
-      sales: { alias: "sales" },
+      sales: { alias: "number" },
     },
   };
   return <Column {...config} style={{height:200}} />;

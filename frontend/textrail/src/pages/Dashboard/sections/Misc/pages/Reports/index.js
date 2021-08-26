@@ -1,6 +1,9 @@
 import React from "react";
 import DashboardCard from "../../../../../../components/DashboardCard";
-import { Tabs } from "antd";
+import { Tabs,Card, List } from "antd";
+import DemoColumn from "../../../MainDashboard/components/DemoColumn";
+import DemoPie from '../../../MainDashboard/components/DemoPie'
+import DemoLine from "../../../MainDashboard/components/DemoLine";
 
 const { TabPane } = Tabs;
 
@@ -11,28 +14,28 @@ const Reports = () => {
   return (
     <div className="dashboardPage">
       <h2>Reports</h2>
-      <DashboardCard>
+      <Card>
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="Dashboard" key="1">
-            Content of Tab Pane 1
+            <DemoColumn/>
           </TabPane>
           <TabPane tab="SMS Batch List" key="2">
-            Content of Tab Pane 2
+            <List/>
           </TabPane>
           <TabPane tab="SMS General Report" key="3">
-            Content of Tab Pane 3
+           <DemoPie/>
           </TabPane>
           <TabPane tab="SMS Comparison Report" key="4">
-            Content of Tab Pane 4
+            <DemoColumn/>
           </TabPane>
           <TabPane tab="SMS Campaign Report" key="5">
-            Content of Tab Pane 5
+            <DemoLine/>
           </TabPane>
           <TabPane tab="SMS Credit History" key="6">
-            Content of Tab Pane 6
+            <List/>
           </TabPane>
         </Tabs>
-      </DashboardCard>
+      </Card>
     </div>
   );
 };

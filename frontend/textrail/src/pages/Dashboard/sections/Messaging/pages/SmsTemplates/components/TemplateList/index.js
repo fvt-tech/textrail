@@ -15,25 +15,26 @@ const TemplateList = ({ list }) => {
   }, []);
 
   return (
-    <List
-      className="demo-loadmore-list"
-      itemLayout="horizontal"
-      dataSource={list}
-      //   bordered
-      header={
-        <span
-          style={{
-            fontSize: 16,
-            display: "block",
-            fontWeight: "500",
-            marginBottom: "0.5rem",
-          }}
-        >
-          All Templates
-        </span>
-      }
-      renderItem={(item) => <TemplateListItem item={item} loading={loading} />}
-    />
+    <>
+      <span
+        style={{
+          fontSize: 16,
+          display: "block",
+          fontWeight: "500",
+          marginBottom: "0.5rem",
+        }}
+      >
+        All Templates
+      </span>
+      <List
+        className="demo-loadmore-list"
+        itemLayout="horizontal"
+        dataSource={list}
+        renderItem={(item) => (
+          <TemplateListItem item={item} loading={loading} />
+        )}
+      />
+    </>
   );
 };
 

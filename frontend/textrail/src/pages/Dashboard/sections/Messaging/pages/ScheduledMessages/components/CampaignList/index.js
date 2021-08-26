@@ -15,24 +15,24 @@ const CampaignList = ({ list }) => {
   }, []);
 
   return (
-    <List
-      className="demo-loadmore-list"
-      itemLayout="horizontal"
-      dataSource={list}
-      header={
-        <span
+    <>
+     <span
           style={{
             fontSize: 16,
             display: "block",
             fontWeight: "500",
-            marginBottom: "0.5rem",
+            marginBottom: "0.7rem",
           }}
         >
           All Campaigns
         </span>
-      }
+    <List
+      className="demo-loadmore-list"
+      itemLayout="horizontal"
+      dataSource={list}
       renderItem={(item) => <CampaignListItem item={item} loading={loading} />}
     />
+    </>
   );
 };
 
@@ -59,7 +59,7 @@ const CampaignListItem = ({ item, loading }) => {
       />
       <List.Item
         actions={[
-          <Button size="small"  onClick={() => setShowEditModal(true)}>
+          <Button size="small" onClick={() => setShowEditModal(true)}>
             Edit
           </Button>,
           <Button

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Empty } from "antd";
+import { Card } from "antd";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import SenderIDList from "./components/SenderIDList";
 import AddSenderID from "./components/AddSenderID";
@@ -24,10 +24,10 @@ const SenderIDs = () => {
   return (
     <div className="dashboardPage">
       <h1>Sender IDs</h1>
-      <DashboardCard>
+      <Card>
         <AddSenderID user={mainUser} />
         <SenderIDList list={senderIds} />
-      </DashboardCard>
+      </Card>
     </div>
   );
 };

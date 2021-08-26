@@ -1,14 +1,25 @@
 import { Checkbox, Col, Form, Input, Row, Select, Upload, Button } from "antd";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { UsergroupAddOutlined, UploadOutlined } from "@ant-design/icons";
 const { Option } = Select;
-const BulkSMSForm = () => {
+const BulkSMSForm = ({onChange,reset}) => {
   const [sms, setSms] = useState({
     numbers: [],
-    sender_id: "",
+    sender: "",
     message: "",
     schedule: false,
   });
+  useEffect(() => {
+    if (sms.message.length === 0) {
+      reset();
+    }
+  }, [sms.message]);
+  const handleChange = (e, fieldname) => {
+    if (fieldname === "message" || fieldname === "sender") {
+      onChange(e, fieldname);
+    }
+    setSms({ ...sms, [fieldname]: e.target.value });
+  };
   return (
     <Form layout="vertical">
       <label style={{ marginBottom: 10, display: "block" }}>
@@ -40,6 +51,8 @@ const BulkSMSForm = () => {
           <Input.TextArea
             rows={1}
             type="text"
+            value={sms.message}
+            onChange={(e) => handleChange(e, "message")}
             style={{ marginRight: "10px" }}
           />
           <Select
