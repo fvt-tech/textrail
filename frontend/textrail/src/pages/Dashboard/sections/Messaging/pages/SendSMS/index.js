@@ -42,36 +42,25 @@ const SendSMS = () => {
   return (
     <div className="dashboardPage">
       <h1>Send SMS</h1>
-      <Row>
-        <Col md={16}>
-          <Card>
-            <Tabs
-              defaultActiveKey="1"
-              onChange={callback}
-              onTabClick={resetToDefault}
-            >
-              <TabPane tab="Single SMS" key="1">
-                <SingleSMSForm reset={resetToDefault} onChange={handleChange} />
-              </TabPane>
-              <TabPane tab="Bulk SMS" key="2">
-                <BulkSMSForm groups={groups} reset={resetToDefault} onChange={handleChange} />
-              </TabPane>
-            </Tabs>
-          </Card>
-        </Col>
-        <Col md={8}>
-          <div
-            style={{
-              width: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <PreviewBox message={sms.message} sender={sms.sender} />
-          </div>
-        </Col>
-      </Row>
+      <Card>
+        <Tabs
+          defaultActiveKey="1"
+          onChange={callback}
+          onTabClick={resetToDefault}
+        >
+          <TabPane tab="Single SMS" key="1">
+            <SingleSMSForm reset={resetToDefault} onChange={handleChange} />
+          </TabPane>
+          <TabPane tab="Bulk SMS" key="2">
+            <BulkSMSForm
+              groups={groups}
+              reset={resetToDefault}
+              onChange={handleChange}
+            />
+          </TabPane>
+        </Tabs>
+      </Card>
+        <PreviewBox message={sms.message} sender={sms.sender} />
     </div>
   );
 };
