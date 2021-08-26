@@ -1,19 +1,50 @@
-import { Checkbox, Col, Form, Input, Row, Select, Upload, Button } from "antd";
-import React, { useState,useEffect } from "react";
+import {
+  Checkbox,
+  Col,
+  Form,
+  Input,
+  Row,
+  Menu,
+  Select,
+  Upload,
+  Button,
+  Dropdown,
+  Tag,
+} from "antd";
+import React, { useState, useEffect } from "react";
 import { UsergroupAddOutlined, UploadOutlined } from "@ant-design/icons";
 const { Option } = Select;
-const BulkSMSForm = ({onChange,reset}) => {
+const BulkSMSForm = ({ onChange, reset, groups }) => {
+  //States
   const [sms, setSms] = useState({
     numbers: [],
     sender: "",
     message: "",
     schedule: false,
   });
+  const [selectedGroup, setSelectedGroup] = useState("");
+
+  //Const Handle Group Selection
+  const handleSelectGroup = (name) => setSelectedGroup(name);
+
+  // Group Dropdown Menu
+  const menu = (
+    <Menu>
+      {groups.map((item) => (
+        <Menu.Item key={item.name} onClick={() => handleSelectGroup(item.name)}>
+          {item.name}
+        </Menu.Item>
+      ))}
+    </Menu>
+  );
+
+  //Reset Side Effect
   useEffect(() => {
     if (sms.message.length === 0) {
       reset();
     }
   }, [sms.message]);
+
   const handleChange = (e, fieldname) => {
     if (fieldname === "message" || fieldname === "sender") {
       onChange(e, fieldname);
@@ -36,10 +67,20 @@ const BulkSMSForm = ({onChange,reset}) => {
         <Col></Col>
         <Col>
           <Form.Item>
-            <Button icon={<UsergroupAddOutlined />}>Import Group</Button>
+            <Dropdown overlay={menu} trigger={["click"]}>
+              <Button icon={<UsergroupAddOutlined />}>Import Group</Button>
+            </Dropdown>
           </Form.Item>
         </Col>
       </Row>
+
+      {selectedGroup.length > 0 && (
+        <div style={{ marginBottom: "1rem" }}>
+          <Tag color="blue" closable onClose={() => setSelectedGroup("")}>
+            {selectedGroup}
+          </Tag>
+        </div>
+      )}
       <Form.Item label="Sender ID">
         <Select
           style={{ height: "100%" }}

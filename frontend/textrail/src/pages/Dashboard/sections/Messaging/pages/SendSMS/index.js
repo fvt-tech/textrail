@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DashboardCard from "../../../../../../components/DashboardCard";
 import { Row, Tabs, Col, Card } from "antd";
 import SingleSMSForm from "./components/SingleSMSForm";
 import BulkSMSForm from "./components/BulkSMSForm";
 import PreviewBox from "./components/PreviewBox";
+import { textrailGetGroups } from "../../../../../../functions/groups";
 
 const { TabPane } = Tabs;
 
@@ -15,7 +16,19 @@ const SendSMS = () => {
     sender: "Sender ID",
     message: "Your Message",
   });
-
+  const [groups, setGroups] = useState([]);
+  const [groupContacts, setGroupContacts] = useState([]);
+  //Fetching all the groups from the database
+  useEffect(() => {
+    const getGroups = async () => {
+      const { data: user } = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      const response = await textrailGetGroups(user._id);
+      console.log(response.data);
+      setGroups(response.data);
+    };
+    getGroups();
+  }, []);
 
   const resetToDefault = () => {
     setSms({
@@ -41,7 +54,7 @@ const SendSMS = () => {
                 <SingleSMSForm reset={resetToDefault} onChange={handleChange} />
               </TabPane>
               <TabPane tab="Bulk SMS" key="2">
-                <BulkSMSForm reset={resetToDefault} onChange={handleChange} />
+                <BulkSMSForm groups={groups} reset={resetToDefault} onChange={handleChange} />
               </TabPane>
             </Tabs>
           </Card>
