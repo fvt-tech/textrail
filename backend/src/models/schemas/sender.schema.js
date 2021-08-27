@@ -19,8 +19,10 @@ const senderSchema = mongoose.Schema({
 
 senderSchema.methods.toJSON = function () {
     const sender = this
+    const senderObj = sender.toObject()
 
-    if(sender.status === 'pending') return
+    if(senderObj.status === 'pending') return
+    return senderObj
 }
 
 module.exports = senderSchema

@@ -8,6 +8,10 @@ const contactSchema = mongoose.Schema({
     number: {
         type: String,
         required: [true, 'Contact number required']
+    },
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
     }
 })
 

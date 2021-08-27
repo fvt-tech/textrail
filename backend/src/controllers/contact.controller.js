@@ -1,9 +1,9 @@
 const Contact = require('./../models/contact.model')
 
 const getContacts = async (req, res) => {
-    const { client } = req.body
+    const { user } = req.body
     try {
-        const contacts = await Contact.find({client})
+        const contacts = await Contact.find({user})
         res.status(201).json({
             status: 'success',
             data: contacts
@@ -75,7 +75,7 @@ const editContact = async (req, res) => {
 const delContact = async (req, res) => {
     const { id } = req.body
     try {
-        const contact = await Contact.deleteOne({_id: id})
+        await Contact.deleteOne({_id: id})
         res.status(201).json({
             status: 'Delete Successful'
         })
