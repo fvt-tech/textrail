@@ -5,7 +5,8 @@ const addSenderId = async (req, res) => {
     try {
         const sender = new Sender({
             name: senderId,
-            user
+            user,
+            status: 'pending'
         })
         await sender.save()
         res.status(201).json({
@@ -58,8 +59,7 @@ const editSenderId = async (req, res) => {
 const delSenderId = async (req, res) => {
     const { id } = req.body
     try {
-        const sender = await Sender.deleteOne({_id: id})
-
+        await Sender.deleteOne({_id: id})
         res.status(201).json({
             status: 'Success',
             message: 'Deleted Successfully'

@@ -73,7 +73,7 @@ const editTemplate = async (req, res) => {
 const delTemplate = async (req, res) => {
     const { id } = req.body
     try {
-        const temp = await Template.deleteOne({_id: id})
+        await Template.deleteOne({_id: id})
         res.status(201).json({
             status: 'success',
             message: 'Deleted Successfully'

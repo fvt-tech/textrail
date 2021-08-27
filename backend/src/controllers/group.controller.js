@@ -42,6 +42,7 @@ const addGroup = async (req, res) => {
             const contact = new Contact({
                 name: item.name,
                 number: item.number,
+                user
             })
             await contact.save()
             nContacts.push(contact._id)
@@ -97,14 +98,15 @@ const delGroup = async (req, res) => {
 }
 
 const addContactToGroup = async (req, res) => {
-    const { id, contact } = req.body
+    const { id, contact, user } = req.body
     try {
         const group = await Group.findById(id)
         if (Array.isArray(contact)) {
             contact.forEach(async (item) => {
                 const newContact = new Contact({
                     name: item.name,
-                    number: item.number
+                    number: item.number,
+                    user
                 })
                 await newContact.save()
                 group.contacts.push(newContact._id)
@@ -114,6 +116,8 @@ const addContactToGroup = async (req, res) => {
                 data: group
             })
         }
+        //implement adding contacts that already exist in the system
+        
         const nContact = new Contact(contact)
         await nContact.save()
 

@@ -59,7 +59,7 @@ const getCampaign = async (req, res) => {
 const editCampaign = async (req, res) => {
     const { id, update } = req.body
     try {
-        const item = await Campaign.updateOne({ _id: id }, { $set: update })
+        await Campaign.updateOne({ _id: id }, { $set: update })
         res.status(201).json({
             status: 'success',
             message: 'Edit Successful'
@@ -75,7 +75,7 @@ const editCampaign = async (req, res) => {
 const delCampaign = async (req, res) => {
     const { id } = req.body
     try {
-        const item = await Campaign.deleteOne({_id: id})
+        await Campaign.deleteOne({_id: id})
         res.status(201).json({
             status: 'Success',
             message: 'Deleted Successfully'
