@@ -64,19 +64,21 @@ export const textrailEditCampaign = async (id, update) => {
 };
 //Delete a Campaign
 export const textrailDeleteCampaign = async (id) => {
+  console.log(id)
   await axios
     .delete(
       `${API_BASE_URL}delCampaign`,
-      { id },
+      { id:id },
       {
         withCredentials: true,
       }
     )
     .then((response) => {
       message.success("Deleting Campaign");
-      setInterval(() => {
-        window.location.reload();
-      }, 2000);
+      console.log(response)
+      // setInterval(() => {
+      //   window.location.reload();
+      // }, 2000);
     })
     .catch((error) => message.error(error.message));
 };

@@ -90,7 +90,6 @@ const BulkSMSForm = ({ onChange, reset, groups }) => {
       <Form.Item label="Message">
         <div style={{ display: "flex", height: "auto" }}>
           <Input.TextArea
-            rows={1}
             type="text"
             value={sms.message}
             onChange={(e) => handleChange(e, "message")}

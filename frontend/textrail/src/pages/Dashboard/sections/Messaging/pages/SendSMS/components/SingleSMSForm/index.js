@@ -40,7 +40,6 @@ const SingleSMSForm = ({ onChange, reset }) => {
       <Form.Item label="Message">
         <div style={{ display: "flex", height: "auto" }}>
           <Input.TextArea
-            rows={1}
             type="text"
             style={{ marginRight: "10px" }}
             value={sms.message}

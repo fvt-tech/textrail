@@ -14,7 +14,7 @@ function callback(key) {
 const SendSMS = () => {
   const [sms, setSms] = useState({
     sender: "Sender ID",
-    message: "Your Message",
+    message: "Your Message ",
   });
   const [groups, setGroups] = useState([]);
   const [groupContacts, setGroupContacts] = useState([]);
