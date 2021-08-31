@@ -33,11 +33,12 @@ const getContact = async (req, res) => {
 }
 
 const addContact = async (req, res) => {
-    const { name, number } = req.body
+    const { name, number,user } = req.body
     try {
         const contact = new Contact({
             name,
-            number
+            number,
+            user
         })
         await contact.save()
 

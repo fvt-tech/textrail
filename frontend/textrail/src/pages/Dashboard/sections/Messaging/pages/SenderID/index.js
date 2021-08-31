@@ -17,7 +17,7 @@ const SenderIDs = () => {
       setMainUser(user);
       const response = await textrailGetSenderIDs(user._id);
       console.log(response);
-      // setSenderIds(response.data)
+      setSenderIds(response.data)
     };
     getSenderIds();
   }, []);

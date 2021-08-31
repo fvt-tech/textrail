@@ -40,7 +40,7 @@ const SenderIDList = ({ list }) => {
           ]}
         >
           <Skeleton loading={loading} title={false} active>
-            <List.Item.Meta title={item.senderId} />
+            <List.Item.Meta title={item.name} />
           </Skeleton>
         </List.Item>
       )}

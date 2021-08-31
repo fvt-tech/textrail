@@ -65,11 +65,11 @@ export const textrailDeleteGroup = async (id) => {
 };
 
 //Add contacts to a group
-export const textrailAddContactsToGroup = async (id, contact) => {
+export const textrailAddContactsToGroup = async (id, contact,user) => {
   await axios
     .post(
       `${API_BASE_URL}addContactToGroup`,
-      { id, contact },
+      { id, contact,user },
       {
         withCredentials: true,
       }

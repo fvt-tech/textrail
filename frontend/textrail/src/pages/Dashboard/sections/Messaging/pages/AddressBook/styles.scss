@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 1rem;
 
     span:nth-child(2){
         font-size: 20px;
@@ -21,4 +22,16 @@
         margin: 0.5rem 0px;
 
     }
+}
+.drawerRemoveFromGroup{
+
+    &:hover{
+        color: red;
+    }
+}
+
+.drawerAddToGroup{
+    &:hover{
+        color: rgb(30, 118, 233);
+    } 
 }

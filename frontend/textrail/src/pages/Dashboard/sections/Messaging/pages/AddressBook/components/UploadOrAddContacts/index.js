@@ -6,7 +6,8 @@ import { textrailAddContactsToGroup } from "../../../../../../../../functions/gr
 import xlsxParser from "xlsx-parse-json";
 const { Option } = Select;
 //This is the button and modal the realises adding a contact to a group or uploading a file of contacts
-const AddContactsToGroup = ({ groups }) => {
+const AddContactsToGroup = ({ groups, user }) => {
+  console.log(user);
   const [visible, setVisible] = useState(false);
   return (
     <div style={{ margin: "0px 6px" }}>
@@ -20,7 +21,7 @@ const AddContactsToGroup = ({ groups }) => {
         visible={visible}
         footer=""
       >
-        <AddContactForm list={groups} />
+        <AddContactForm user={user} list={groups} />
       </Modal>
     </div>
   );
@@ -39,7 +40,7 @@ const dummyGroupList = [
   },
 ];
 // This is the wrapper for the two form types
-const AddContactForm = ({ list = dummyGroupList }) => {
+const AddContactForm = ({ list = dummyGroupList, user }) => {
   const [group, setGroup] = useState("");
   const handleChange = (value) => {
     setGroup(value);
@@ -71,9 +72,9 @@ const AddContactForm = ({ list = dummyGroupList }) => {
       {group.length > 0 && (
         <>
           {radioType === "single" ? (
-            <AddOneContactForm group={group} />
+            <AddOneContactForm user={user} group={group} />
           ) : (
-            <UploadContacts group={group} />
+            <UploadContacts user={user} group={group} />
           )}
         </>
       )}
@@ -81,7 +82,7 @@ const AddContactForm = ({ list = dummyGroupList }) => {
   );
 };
 //This is the one contact form
-const AddOneContactForm = ({ group }) => {
+const AddOneContactForm = ({ group, user }) => {
   //Contact State
   const [contact, setContact] = useState({
     name: "",
@@ -93,7 +94,7 @@ const AddOneContactForm = ({ group }) => {
   };
   //Handling contact addition to groups
   const handleAddContactToGroup = async () => {
-    await textrailAddContactsToGroup(group, contact);
+    await textrailAddContactsToGroup(group, { ...contact, user });
   };
   return (
     <Form layout="vertical" onFinish={handleAddContactToGroup}>
@@ -120,7 +121,7 @@ const AddOneContactForm = ({ group }) => {
   );
 };
 //This is the file upload form
-const UploadContacts = ({ group }) => {
+const UploadContacts = ({ group, user }) => {
   const [file, setFile] = useState({});
   const [contact, setContact] = useState([]);
 
@@ -133,7 +134,7 @@ const UploadContacts = ({ group }) => {
       parsedData.Sheet1.map((item) => {
         let newArray = Object.values(item);
         console.log(newArray);
-        let newObj = { name: newArray[0], number: newArray[1] };
+        let newObj = { name: newArray[0], number: newArray[1], user };
         newContacts.push(newObj);
       });
       setContact(newContacts);
@@ -145,7 +146,7 @@ const UploadContacts = ({ group }) => {
     if (contact.length > 0) {
       await textrailAddContactsToGroup(group, contact);
     } else {
-      message.error("Please Choose A File")
+      message.error("Please Choose A File");
     }
   };
 
