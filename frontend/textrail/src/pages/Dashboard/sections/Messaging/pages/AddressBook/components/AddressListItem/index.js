@@ -7,6 +7,7 @@ import {
   MinusOutlined,
 } from "@ant-design/icons";
 import { textrailEditGroup } from "../../../../../../../../functions/groups";
+import { textrailDeleteContact } from "../../../../../../../../functions/contacts";
 const { Option } = Select;
 
 const AddressListItem = ({ groups, contactItem }) => {
@@ -77,6 +78,17 @@ const AddressListItem = ({ groups, contactItem }) => {
     });
   };
 
+  //Delete contact prompt
+  const deleteContact = () => {
+    Modal.error({
+      title: "Are you sure you want to delete this contact",
+      okCancel: true,
+      onOk: async () => {
+         await textrailDeleteContact(contactItem._id);
+      },
+    });
+  };
+
   return (
     <>
       {/* Below is the drawer for the address page list item */}
@@ -88,7 +100,7 @@ const AddressListItem = ({ groups, contactItem }) => {
         onClose={() => setShowDrawer(false)}
         footer={[
           <Button type="primary">Edit</Button>,
-          <Button type="text" danger>
+          <Button type="text" onClick={deleteContact} danger>
             Delete
           </Button>,
         ]}

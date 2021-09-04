@@ -60,19 +60,16 @@ export const textrailEditTemplate = async (body) => {
 };
 //Delete a Template
 export const textrailDeleteTemplate = async (id) => {
-  await axios
-    .delete(
-      `${API_BASE_URL}delTemplate`,
-      { id },
-      {
-        withCredentials: true,
-      }
-    )
-    .then((response) => {
-      message.success("Deleting SMS Template");
-      setInterval(() => {
-        window.location.reload();
-      }, 2000);
+    await axios({
+      method: "delete",
+      url: `${API_BASE_URL}delTemplate`,
+      data: { id: id },
     })
-    .catch((error) => message.error(error.message));
+      .then((response) => {
+        message.success("Deleting SMS Template");
+        setInterval(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch((error) => message.error(error.message));
 };

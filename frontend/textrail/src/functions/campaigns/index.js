@@ -64,21 +64,16 @@ export const textrailEditCampaign = async (id, update) => {
 };
 //Delete a Campaign
 export const textrailDeleteCampaign = async (id) => {
-  console.log(id)
-  await axios
-    .delete(
-      `${API_BASE_URL}delCampaign`,
-      { id:id },
-      {
-        withCredentials: true,
-      }
-    )
-    .then((response) => {
-      message.success("Deleting Campaign");
-      console.log(response)
-      // setInterval(() => {
-      //   window.location.reload();
-      // }, 2000);
+    await axios({
+      method: "delete",
+      url: `${API_BASE_URL}delCampaign`,
+      data: { id: id },
     })
-    .catch((error) => message.error(error.message));
+      .then((response) => {
+        message.success("Campaign Deleted Successfully");
+        setInterval(() => {
+          window.location.reload();
+        }, 2000);
+      })
+      .catch((error) => message.error(error.message));
 };

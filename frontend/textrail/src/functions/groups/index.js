@@ -60,14 +60,18 @@ export const textrailEditGroup = async (id, update) => {
 };
 //Delete a group
 export const textrailDeleteGroup = async (id) => {
-  const response = await axios.post(
-    `${API_BASE_URL}delGroup`,
-    { id },
-    {
-      withCredentials: true,
-    }
-  );
-  console.log(response.data);
+  await axios({
+    method: "delete",
+    url: `${API_BASE_URL}delGroup`,
+    data: { id: id },
+  })
+    .then((response) => {
+      message.success("Group Deleted Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
 
 //Add contacts to a group

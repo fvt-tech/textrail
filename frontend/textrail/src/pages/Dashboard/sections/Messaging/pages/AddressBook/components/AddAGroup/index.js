@@ -10,7 +10,7 @@ const AddAGroup = () => {
     <div style={{ margin: "0px 6px" }}>
       <Button onClick={() => setVisible(true)}>
         <UsergroupAddOutlined />
-        Add A Group
+         Create Group
       </Button>
       <Modal
         onCancel={() => setVisible(false)}

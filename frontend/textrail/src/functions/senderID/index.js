@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "antd";
 import { API_BASE_URL } from "../../constants";
 
 //Get all SenderIDs
@@ -27,12 +28,16 @@ export const textrailAddSenderID = async (senderId, user) => {
 export const textrailEditSenderID = async () => {};
 //Delete a SenderID
 export const textrailDeleteSenderID = async (id) => {
-  const response = await axios.delete(
-    `${API_BASE_URL}delSenderId`,
-    { id },
-    {
-      withCredentials: true,
-    }
-  );
-  return response.message;
+  await axios({
+    method: "delete",
+    url: `${API_BASE_URL}delSenderId`,
+    data: { id: id },
+  })
+    .then((response) => {
+      message.success("Deleting Sender ID");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
+    })
+    .catch((error) => message.error(error.message));
 };
