@@ -16,6 +16,7 @@ const { Option } = Select;
 const AddressBook = () => {
   const [groups, setGroups] = useState([]);
   const [groupContacts, setGroupContacts] = useState([]);
+  const [allContacts, setAllContacts] = useState([]);
   const [mainUser, setMainUser] = useState();
   //Fetching all the groups from the database
   useEffect(() => {
@@ -37,17 +38,22 @@ const AddressBook = () => {
       console.log(user);
       const response = await textrailGetContacts(user._id);
       console.log(response.data);
-      // setGroups(response.data);
+      setGroupContacts(response.data);
+      setAllContacts(response.data);
     };
     getContacts();
   }, []);
 
   //Changing the contacts for current group
-  const handleContactsForGroup = (group_id) =>
-    setGroupContacts(
-      groups.filter((group) => group._id === group_id)[0].contacts
-    );
-
+  const handleContactsForGroup = (group_id) => {
+    if (group_id === "all") {
+      setGroupContacts([...allContacts]);
+    } else {
+      setGroupContacts(
+        groups.filter((group) => group._id === group_id)[0].contacts
+      );
+    }
+  };
   return (
     <div className="dashboardPage">
       <h1>Address Book</h1>
@@ -64,7 +70,11 @@ const AddressBook = () => {
           dataSource={groupContacts}
           header="Contacts"
           renderItem={(item) => (
-            <AddressListItem key={item._id} groups={groups} contactItem={item} />
+            <AddressListItem
+              key={item._id}
+              groups={groups}
+              contactItem={item}
+            />
           )}
         />
       </Card>
@@ -74,15 +84,18 @@ const AddressBook = () => {
 
 export default AddressBook;
 
-
 //All the actions for the address book page
 const AddressBookActions = ({ groups, onChange, user }) => {
   return (
     <div className="addressBookActions">
       <Select
-        placeholder="Select A Group"
+        placeholder="Filter By Group"
         onChange={(value) => onChange(value)}
+        defaultValue="all"
       >
+        <Option value="all" key="all">
+          All Contacts
+        </Option>
         {groups?.map((group) => (
           <Option key={group.name} value={group._id}>
             {group.name}

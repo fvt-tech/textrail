@@ -25,7 +25,23 @@ export const textrailAddSenderID = async (senderId, user) => {
   return response.data;
 };
 //Edit a SenderID
-export const textrailEditSenderID = async () => {};
+export const textrailEditSenderID = async (id,update) => {
+  await axios
+  .post(
+    `${API_BASE_URL}editSenderId`,
+    { id, update },
+    {
+      withCredentials: true,
+    }
+  )
+  .then((response) => {
+    message.success("Campaign Edited Successfully");
+    setInterval(() => {
+      window.location.reload();
+    }, 2000);
+  })
+  .catch((error) => message.error(error.message));
+};
 //Delete a SenderID
 export const textrailDeleteSenderID = async (id) => {
   await axios({

@@ -20,6 +20,7 @@ const AddTemplateModal = ({ visible, onClose }) => {
       title="Message Template"
       visible={visible}
       footer=""
+      onCancel={onClose}
     >
       <Form layout="vertical" onFinish={handleAddTemplate}>
         <Form.Item label="Reference Name">

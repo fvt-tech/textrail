@@ -1,22 +1,22 @@
-import React,{useState} from "react";
-import {Modal,Form,Input,Button} from "antd"
+import React, { useState } from "react";
+import { Modal, Form, Input, Button } from "antd";
 import { textrailEditTemplate } from "../../../../../../../../../../functions/templates";
-const EditTemplate = ({visible,template,onChange}) => {
-    const {message}=template;
-    const [update, setUpdate] = useState({
-        message: message,
-      });
-      //Handler for form field changes
-      const handleChange = (e, fieldname) =>
-        setUpdate({ ...template, [fieldname]: e.target.value });
-      //Handler for editinging templates
-      const handleEditTemplate = async () => {
-          const body={
-              id:template._id,
-              message:update.message
-          }
-        await textrailEditTemplate(body);
-      };
+const EditTemplate = ({ visible, template, onChange }) => {
+  const { message } = template;
+  const [update, setUpdate] = useState({
+    message: message,
+  });
+  //Handler for form field changes
+  const handleChange = (e, fieldname) =>
+    setUpdate({ ...template, [fieldname]: e.target.value });
+  //Handler for editinging templates
+  const handleEditTemplate = async () => {
+    const body = {
+      id: template._id,
+      message: update.message,
+    };
+    await textrailEditTemplate(body);
+  };
   return (
     <Modal
       style={{ borderRadius: "10px" }}
