@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Avatar, Drawer, List, Select, Modal } from "antd";
+import { Button, Avatar, Drawer, List, Select, Modal, Form, Input } from "antd";
 import {
   UserOutlined,
   EyeOutlined,
@@ -7,11 +7,16 @@ import {
   MinusOutlined,
 } from "@ant-design/icons";
 import { textrailEditGroup } from "../../../../../../../../functions/groups";
-import { textrailDeleteContact } from "../../../../../../../../functions/contacts";
+import {
+  textrailDeleteContact,
+  textrailEditContact,
+} from "../../../../../../../../functions/contacts";
 const { Option } = Select;
 
 const AddressListItem = ({ groups, contactItem }) => {
   const [showDrawer, setShowDrawer] = useState(false);
+  const [showInnerDrawer, setShowInnerDrawer] = useState(false);
+
   const [drawerListType, setDrawerListType] = useState("member");
   const [drawerListData, setDrawerListData] = useState([]);
 
@@ -84,7 +89,7 @@ const AddressListItem = ({ groups, contactItem }) => {
       title: "Are you sure you want to delete this contact",
       okCancel: true,
       onOk: async () => {
-         await textrailDeleteContact(contactItem._id);
+        await textrailDeleteContact(contactItem._id);
       },
     });
   };
@@ -106,6 +111,13 @@ const AddressListItem = ({ groups, contactItem }) => {
         ]}
         footerStyle={{ textAlign: "right" }}
       >
+        {/* Contact Edit Drawer */}
+        <EditContactDrawer
+          visible={showInnerDrawer}
+          onClose={() => setShowInnerDrawer(false)}
+          contact={contactItem}
+        />
+
         <div className="contactDrawerContent">
           <Avatar size={100} icon={<UserOutlined />} />
           <span>{contactItem.name}</span>
@@ -162,3 +174,56 @@ const AddressListItem = ({ groups, contactItem }) => {
 };
 
 export default AddressListItem;
+
+//Edit Contact Drawer
+const EditContactDrawer = ({ contact, onClose, visible }) => {
+  const { name: contactName, number: contactNumber } = contact;
+  const [update, setUpdate] = useState({
+    name: contactName,
+    number: contactNumber,
+  });
+
+  //Handling state changes
+  const handleChange = (e, fieldname) => {
+    setUpdate({ ...update, [fieldname]: e.target.value });
+  };
+  //Handling contact edit
+  const handleEditContact = async () => {
+    await textrailEditContact(contact._id, {
+      ...update,
+      _id: contact._id,
+      user: contact.user,
+    });
+  };
+  return (
+    <Drawer
+      title="Edit Contact"
+      visible={visible}
+      placement="right"
+      width="min(100vw,400px)"
+      onClose={onClose}
+    >
+      <Form layout="vertical" onFinish={handleEditContact}>
+        <Form.Item label="Contact Name">
+          <Input
+            placeholder="Enter contact name"
+            value={update.name}
+            onChange={(e) => handleChange(e, "name")}
+          />
+        </Form.Item>
+        <Form.Item label="Contact Number">
+          <Input
+            placeholder="Enter contact number"
+            value={update.number}
+            onChange={(e) => handleChange(e, "number")}
+          />
+        </Form.Item>
+        <Form.Item style={{ textAlign: "right" }}>
+          <Button htmlType="submit" type="primary">
+            Save
+          </Button>
+        </Form.Item>
+      </Form>
+    </Drawer>
+  );
+};

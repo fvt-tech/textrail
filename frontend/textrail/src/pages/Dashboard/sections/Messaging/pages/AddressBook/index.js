@@ -16,7 +16,9 @@ const { Option } = Select;
 const AddressBook = () => {
   const [groups, setGroups] = useState([]);
   const [groupContacts, setGroupContacts] = useState([]);
-  const [allContacts, setAllContacts] = useState([]);
+  const [allContacts, setAllContacts] = useState([
+    
+  ]);
   const [mainUser, setMainUser] = useState();
   //Fetching all the groups from the database
   useEffect(() => {
@@ -25,8 +27,10 @@ const AddressBook = () => {
       console.log(user);
       setMainUser(user._id);
       const response = await textrailGetGroups(user._id);
-      console.log(response.data);
-      setGroups(response.data);
+
+      if (response) {
+        setGroups(response.data);
+      }
     };
     getGroups();
   }, []);
@@ -37,9 +41,11 @@ const AddressBook = () => {
       const { data: user } = JSON.parse(localStorage.getItem("user"));
       console.log(user);
       const response = await textrailGetContacts(user._id);
-      console.log(response.data);
-      setGroupContacts(response.data);
-      setAllContacts(response.data);
+
+      if (response) {
+        setGroupContacts(response.data);
+        setAllContacts(response.data);
+      }
     };
     getContacts();
   }, []);
