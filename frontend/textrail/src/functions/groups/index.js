@@ -23,8 +23,7 @@ export const textrailGetGroup = async (user, id) => {
       withCredentials: true,
     }
   );
-  console.log(response.data);
-  return response;
+  return response.data;
 };
 //Add a group
 export const textrailAddGroup = async (group) => {

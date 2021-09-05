@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Button, Form, Input, message, Modal, Radio, Select } from "antd";
+import {
+  Button,
+  Empty,
+  Modal,
+  Radio,
+  Select,
+  Tabs,
+} from "antd";
 import "./styles.scss";
 import { UserAddOutlined } from "@ant-design/icons";
-import { textrailAddContactsToGroup } from "../../../../../../../../functions/groups";
-import xlsxParser from "xlsx-parse-json";
+import UploadContacts from "./components/UploadContacts";
+import AddOneContactForm from "./components/AddASingleContact";
+import AddExistingContact from "./components/AddExistingContact";
 const { Option } = Select;
+const { TabPane } = Tabs;
 //This is the button and modal the realises adding a contact to a group or uploading a file of contacts
 const AddContactsToGroup = ({ groups, user }) => {
   console.log(user);
@@ -17,7 +26,7 @@ const AddContactsToGroup = ({ groups, user }) => {
       </Button>
       <Modal
         onCancel={() => setVisible(false)}
-        title="Add or Upload Contacts to a Group"
+        title="Add Contact"
         visible={visible}
         footer=""
       >
@@ -49,131 +58,53 @@ const AddContactForm = ({ list = dummyGroupList, user }) => {
   const [radioType, setRadioType] = useState("single");
   return (
     <div className="addContactForm">
-      <label className="items">Group Name</label>
-      <Select
-        className="items"
-        placeholder="Select A Group"
-        onChange={handleChange}
-      >
-        {list.map((item) => (
-          <Option key={item._id} value={item._id}>
-            {item.name}
-          </Option>
-        ))}
-      </Select>
-      <Radio.Group
-        className="items"
-        value={radioType}
-        onChange={(e) => setRadioType(e.target.value)}
-      >
-        <Radio value="single">Add Contact</Radio>
-        <Radio value="upload">Upload File</Radio>
-      </Radio.Group>
-      {group.length > 0 && (
-        <>
-          {radioType === "single" ? (
-            <AddOneContactForm user={user} group={group} />
-          ) : (
-            <UploadContacts user={user} group={group} />
-          )}
-        </>
-      )}
+      <Tabs defaultActiveKey="1">
+        <TabPane tab="Add Contact" key="1">
+          <div>
+            <AddOneContactForm user={user} />
+          </div>
+        </TabPane>
+        <TabPane tab="Add Contact To Group" key="2">
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <label className="items">Group Name</label>
+            <Select
+              className="items"
+              placeholder="Select A Group"
+              onChange={handleChange}
+            >
+              {list.map((item) => (
+                <Option key={item._id} value={item._id}>
+                  {item.name}
+                </Option>
+              ))}
+            </Select>
+            <Radio.Group
+              className="items"
+              value={radioType}
+              onChange={(e) => setRadioType(e.target.value)}
+            >
+              <Radio value="single">Add Contact</Radio>
+              <Radio value="upload">Upload File</Radio>
+              <Radio value="existing">Existing Contact</Radio>
+            </Radio.Group>
+            {group.length > 0 && (
+              <>
+                {radioType === "single" ? (
+                  <AddOneContactForm user={user} group={group} />
+                ) : (
+                  <>
+                    {radioType === "upload" ? (
+                      <UploadContacts user={user} group={group} />
+                    ) : (
+                      <AddExistingContact group={group}/>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </div>
+        </TabPane>
+      </Tabs>
     </div>
-  );
-};
-//This is the one contact form
-const AddOneContactForm = ({ group, user }) => {
-  //Contact State
-  const [contact, setContact] = useState({
-    name: "",
-    number: "",
-  });
-  //Handling state changes
-  const handleChange = (e, fieldname) => {
-    setContact({ ...contact, [fieldname]: e.target.value });
-  };
-  //Handling contact addition to groups
-  const handleAddContactToGroup = async () => {
-    await textrailAddContactsToGroup(group, { ...contact, user });
-  };
-  return (
-    <Form layout="vertical" onFinish={handleAddContactToGroup}>
-      <Form.Item label="Contact Name">
-        <Input
-          placeholder="Enter contact name"
-          value={contact.name}
-          onChange={(e) => handleChange(e, "name")}
-        />
-      </Form.Item>
-      <Form.Item label="Contact Number">
-        <Input
-          placeholder="Enter contact number"
-          value={contact.number}
-          onChange={(e) => handleChange(e, "number")}
-        />
-      </Form.Item>
-      <Form.Item style={{ textAlign: "right" }}>
-        <Button htmlType="submit" type="primary">
-          Save
-        </Button>
-      </Form.Item>
-    </Form>
-  );
-};
-//This is the file upload form
-const UploadContacts = ({ group, user }) => {
-  const [file, setFile] = useState({});
-  const [contact, setContact] = useState([]);
-
-  //Converting the file to an array of contacts
-  const handleContacts = (file) => {
-    console.log(file);
-    xlsxParser.onFileSelection(file).then((data) => {
-      var parsedData = data;
-      const newContacts = [];
-      parsedData.Sheet1.map((item) => {
-        let newArray = Object.values(item);
-        console.log(newArray);
-        let newObj = { name: newArray[0], number: newArray[1], user };
-        newContacts.push(newObj);
-      });
-      setContact(newContacts);
-    });
-  };
-
-  // Handling the contacts upload into the group
-  const handleAddContactToGroup = async () => {
-    if (contact.length > 0) {
-      await textrailAddContactsToGroup(group, contact);
-    } else {
-      message.error("Please Choose A File");
-    }
-  };
-
-  return (
-    <Form layout="vertical" onFinish={handleAddContactToGroup}>
-      <Form.Item
-        label={
-          <>
-            <span>Expected Columns:</span>
-            <span className="fieldsHint">Name, Number(with country code)</span>
-          </>
-        }
-      >
-        <Input
-          type="file"
-          accept=".xlsx,.xls"
-          onChange={(e) => handleContacts(e.target.files[0])}
-        />
-        <label className="smallHints">
-          Accepted Formats:.csv,.xls,.xlsx,.txt
-        </label>
-      </Form.Item>
-      <Form.Item style={{ textAlign: "right" }}>
-        <Button htmlType="submit" type="primary">
-          Save
-        </Button>
-      </Form.Item>
-    </Form>
   );
 };

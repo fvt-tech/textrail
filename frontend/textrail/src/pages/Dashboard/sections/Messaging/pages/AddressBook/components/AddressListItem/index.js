@@ -25,6 +25,7 @@ const AddressListItem = ({ groups, contactItem }) => {
     if (drawerListType === "member") {
       let partOf = [];
       for (let i = 0; i < groups.length; i++) {
+        // console.log(groups[i], contactItem);
         let found = groups[i].contacts.find(
           (contact) => contact._id === contactItem._id
         );
@@ -47,7 +48,7 @@ const AddressListItem = ({ groups, contactItem }) => {
       console.log(contactItem.name, "Not a member", notPartOf);
       setDrawerListData(notPartOf);
     }
-  }, [drawerListType]);
+  }, [groups, drawerListType]);
 
   //Message prompts
   //Delete From Group Prompt
