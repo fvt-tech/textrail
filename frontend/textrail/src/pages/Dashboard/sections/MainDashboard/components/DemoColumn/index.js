@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Column } from "@ant-design/charts";
 
-const DemoColumn = () => {
+const DemoColumn = ({ height }) => {
   var data = [
     {
       type: "Sent Messages",
@@ -46,7 +46,7 @@ const DemoColumn = () => {
       sales: { alias: "number" },
     },
   };
-  return <Column {...config} style={{height:200}} />;
+  return <Column {...config} style={{ height: height ? height : 200 }} />;
 };
 
 export default DemoColumn;

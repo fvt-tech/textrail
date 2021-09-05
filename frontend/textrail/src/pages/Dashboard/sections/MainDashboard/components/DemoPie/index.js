@@ -1,11 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Pie, G2 } from '@ant-design/charts';
+import React, { useState, useEffect } from "react";
+import { Pie, G2 } from "@ant-design/charts";
 
-const DemoPie= () => {
+const DemoPie = ({ height }) => {
   const { registerTheme } = G2;
-  registerTheme('custom-theme', {
-    colors10: ['#FACDAA', '#F4A49E', '#EE7B91', '#E85285', '#BE408C', '#BE408C'],
-    colors20: ['#FACDAA', '#F4A49E', '#EE7B91', '#E85285', '#BE408C', '#BE408C', '#942D93'],
+  registerTheme("custom-theme", {
+    colors10: [
+      "#FACDAA",
+      "#F4A49E",
+      "#EE7B91",
+      "#E85285",
+      "#BE408C",
+      "#BE408C",
+    ],
+    colors20: [
+      "#FACDAA",
+      "#F4A49E",
+      "#EE7B91",
+      "#E85285",
+      "#BE408C",
+      "#BE408C",
+      "#942D93",
+    ],
   });
   const data = [
     {
@@ -36,14 +51,14 @@ const DemoPie= () => {
   const config = {
     appendPadding: 10,
     data,
-    angleField: 'value',
-    colorField: 'type',
+    angleField: "value",
+    colorField: "type",
     radius: 0.8,
     label: {},
-    interactions: [{ type: 'element-active' }],
-    theme: 'custom-theme',
+    interactions: [{ type: "element-active" }],
+    theme: "custom-theme",
   };
-  return <Pie {...config} style={{height:250}} />;
+  return <Pie {...config} style={{ height: height ? height : 250 }} />;
 };
 
 export default DemoPie;

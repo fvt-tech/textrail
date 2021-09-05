@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Line,  } from "@ant-design/charts";
 
-const DemoLine = () => {
+const DemoLine = ({height}) => {
   const [data, setData] = useState([]);
   useEffect(() => {
     asyncFetch();
@@ -23,7 +23,7 @@ const DemoLine = () => {
     yField: "scales",
     xAxis: { tickCount: 5 },
   };
-  return <Line {...config} style={{ height: 250 }} />;
+  return <Line {...config} style={{ height: height ? height : 250 }} />;
 };
 
 export default DemoLine;

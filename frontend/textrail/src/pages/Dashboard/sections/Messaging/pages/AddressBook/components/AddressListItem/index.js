@@ -104,7 +104,9 @@ const AddressListItem = ({ groups, contactItem }) => {
         width="min(100vw,400px)"
         onClose={() => setShowDrawer(false)}
         footer={[
-          <Button type="primary">Edit</Button>,
+          <Button type="primary" onClick={() => setShowInnerDrawer(true)}>
+            Edit
+          </Button>,
           <Button type="text" onClick={deleteContact} danger>
             Delete
           </Button>,

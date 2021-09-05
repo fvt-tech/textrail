@@ -1,8 +1,8 @@
 import React from "react";
 import DashboardCard from "../../../../../../components/DashboardCard";
-import { Tabs,Card, List } from "antd";
+import { Tabs, Card, List } from "antd";
 import DemoColumn from "../../../MainDashboard/components/DemoColumn";
-import DemoPie from '../../../MainDashboard/components/DemoPie'
+import DemoPie from "../../../MainDashboard/components/DemoPie";
 import DemoLine from "../../../MainDashboard/components/DemoLine";
 
 const { TabPane } = Tabs;
@@ -17,22 +17,22 @@ const Reports = () => {
       <Card>
         <Tabs defaultActiveKey="1" onChange={callback}>
           <TabPane tab="Dashboard" key="1">
-            <DemoColumn/>
+            <DemoColumn height={450} />
           </TabPane>
           <TabPane tab="SMS Batch List" key="2">
-            <List/>
+            <List />
           </TabPane>
           <TabPane tab="SMS General Report" key="3">
-           <DemoPie/>
+            <DemoPie height={450} />
           </TabPane>
           <TabPane tab="SMS Comparison Report" key="4">
-            <DemoColumn/>
+            <DemoColumn height={450} />
           </TabPane>
           <TabPane tab="SMS Campaign Report" key="5">
-            <DemoLine/>
+            <DemoLine height={450} />
           </TabPane>
           <TabPane tab="SMS Credit History" key="6">
-            <List/>
+            <List />
           </TabPane>
         </Tabs>
       </Card>
