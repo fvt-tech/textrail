@@ -13,18 +13,6 @@ const AddExistingContact = ({ group }) => {
   const [groupDetails, setGroupDetails] = useState({});
   const [selectedContact, setSelectedContact] = useState("");
   useEffect(() => {
-    const getContacts = async () => {
-      const { data: user } = JSON.parse(localStorage.getItem("user"));
-      console.log(user);
-      const response = await textrailGetContacts(user._id);
-      if (response) {
-        setAllContacts(response.data);
-      }
-    };
-    getContacts();
-  }, []);
-
-  useEffect(() => {
     const getGroupDetails = async () => {
       const { data: user } = JSON.parse(localStorage.getItem("user"));
       const response = await textrailGetGroup(user._id, group);
@@ -33,11 +21,27 @@ const AddExistingContact = ({ group }) => {
       }
     };
     getGroupDetails();
-  }, []);
+  }, [group]);
+
+  useEffect(() => {
+    const getContacts = async () => {
+      const { data: user } = JSON.parse(localStorage.getItem("user"));
+      console.log(user);
+      const response = await textrailGetContacts(user._id);
+      if (response) {
+        let test = response.data.filter(
+          (item) => !groupDetails?.contacts?.includes(item._id)
+        );
+        setAllContacts(test);
+      }
+    };
+    getContacts();
+  }, [groupDetails]);
 
   //   Handler for contact change
   const handleChange = (value) => {
     setSelectedContact(value);
+    console.log(value);
   };
 
   //Handle for adding an existing contact to a group
