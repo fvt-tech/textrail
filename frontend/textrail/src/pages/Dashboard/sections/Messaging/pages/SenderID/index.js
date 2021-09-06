@@ -11,13 +11,12 @@ const SenderIDs = () => {
   //Get all sender ids
   useEffect(() => {
     const getSenderIds = async () => {
-      const {
-        data:user
-      } = JSON.parse(localStorage.getItem("user"));
+      const { data: user } = JSON.parse(localStorage.getItem("user"));
       setMainUser(user);
       const response = await textrailGetSenderIDs(user._id);
       console.log(response);
-      // setSenderIds(response.data)
+      let filteredData = response.data.filter((item) => item != null);
+      setSenderIds(filteredData)
     };
     getSenderIds();
   }, []);
