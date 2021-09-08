@@ -6,14 +6,26 @@ const campaignSchema = mongoose.Schema({
         required: [true, 'name required']
     },
 
-    date: {
+    startDate: {
         type: Date,
-        required: [true, 'Date required']
+        required: [true, 'Start Date required']
+    },
+
+    closeDate: {
+        type: Date,
+        required: [true, 'Close Date required']
     },
 
     frequency: {
-        type: Number,
-        value: 1
+        type: String,
+        required: [true, 'frequency required']
+    },
+
+    next : String,
+
+    message: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Message'
     },
 
     user: {

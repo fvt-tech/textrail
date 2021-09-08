@@ -11,3 +11,4 @@ GET /auth/logout for logging a user out
 /addSenderId, /getSenderIds, /editSenderId, DELETE /delSenderId
 /addCampaign, /getCampaign, /getCampaigns, /editCampaign, DELETE /delCampaign
 /addTemplate, /getTemplate, /getTemplates, /editTemplate, DELETE /delTemplate
+check message.schema.js for message template key fields

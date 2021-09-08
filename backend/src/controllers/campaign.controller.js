@@ -1,13 +1,18 @@
 const Campaign = require('./../models/campaign.model')
+const Message = require('./../models/message.model')
 
 const addCampaign = async (req, res) => {
-    const { name, date, user, frequency } = req.body
+    const { name, startDate, closeDate, user, frequency, message } = req.body
     try {
+        const msg = new Message(message)
+        await msg.save()
         const campaign = new Campaign({
             name,
-            date,
+            startDate,
+            closeDate,
             user,
-            frequency
+            frequency,
+            message: msg._id
         })
         await campaign.save()
 
@@ -87,6 +92,7 @@ const delCampaign = async (req, res) => {
         })
     }
 }
+
 
 module.exports = {
     getCampaign,
