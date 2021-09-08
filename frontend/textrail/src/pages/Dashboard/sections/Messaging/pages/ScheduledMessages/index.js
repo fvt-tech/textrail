@@ -21,7 +21,7 @@ const ScheduledMessages = () => {
   return (
     <div className="dashboardPage">
       <h1>SMS Campaigns</h1>
-      <Card title={<AddACampaign user={mainUser._id} />}>
+      <Card>
         <CampaignList list={campaigns} />
       </Card>
     </div>
@@ -29,3 +29,4 @@ const ScheduledMessages = () => {
 };
 
 export default ScheduledMessages;
+// title={<AddACampaign user={mainUser._id} />}
