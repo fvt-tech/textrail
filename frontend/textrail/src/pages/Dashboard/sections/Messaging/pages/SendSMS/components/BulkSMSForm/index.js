@@ -13,18 +13,23 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { UsergroupAddOutlined, UploadOutlined } from "@ant-design/icons";
+import { textrailAddCampaign } from "../../../../../../../../functions/campaigns";
 const { Option } = Select;
-const BulkSMSForm = ({ onChange, reset, groups }) => {
+const BulkSMSForm = ({ onChange, reset, groups, user }) => {
   const [recurring, setRecurring] = useState(false);
 
   //States
   const [sms, setSms] = useState({
-    numbers: [],
-    sender: "",
+    contacts: [],
+    senderID: "",
     message: "",
-    schedule: false,
   });
   const [selectedGroup, setSelectedGroup] = useState("");
+
+  // Handle message transmission
+  const handleSendMessage = async () => {
+    await textrailAddCampaign();
+  };
 
   //Const Handle Group Selection
   const handleSelectGroup = (name) => setSelectedGroup(name);
@@ -56,7 +61,7 @@ const BulkSMSForm = ({ onChange, reset, groups }) => {
   return (
     <Form layout="vertical">
       <label style={{ marginBottom: 10, display: "block" }}>
-        Import Numbers
+        Import contacts
       </label>
       <Row>
         <Col style={{ marginRight: "10px" }}>

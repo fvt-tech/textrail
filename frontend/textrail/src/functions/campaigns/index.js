@@ -27,15 +27,10 @@ export const textrailGetCampaign = async (id) => {
 };
 //Add a Campaign
 export const textrailAddCampaign = async (campaign) => {
-  const { name, date, user, frequency } = campaign;
   await axios
-    .post(
-      `${API_BASE_URL}addCampaign`,
-      { name, date, user, frequency },
-      {
-        withCredentials: true,
-      }
-    )
+    .post(`${API_BASE_URL}addCampaign`, campaign, {
+      withCredentials: true,
+    })
     .then((response) => {
       message.success("Campaign Created Successfully");
       setInterval(() => {
@@ -64,16 +59,16 @@ export const textrailEditCampaign = async (id, update) => {
 };
 //Delete a Campaign
 export const textrailDeleteCampaign = async (id) => {
-    await axios({
-      method: "delete",
-      url: `${API_BASE_URL}delCampaign`,
-      data: { id: id },
+  await axios({
+    method: "delete",
+    url: `${API_BASE_URL}delCampaign`,
+    data: { id: id },
+  })
+    .then((response) => {
+      message.success("Campaign Deleted Successfully");
+      setInterval(() => {
+        window.location.reload();
+      }, 2000);
     })
-      .then((response) => {
-        message.success("Campaign Deleted Successfully");
-        setInterval(() => {
-          window.location.reload();
-        }, 2000);
-      })
-      .catch((error) => message.error(error.message));
+    .catch((error) => message.error(error.message));
 };
