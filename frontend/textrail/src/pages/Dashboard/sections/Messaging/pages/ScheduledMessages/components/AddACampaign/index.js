@@ -36,7 +36,9 @@ const AddCampaignForm = ({ user }) => {
   });
   //Handle change  for fields
   const handleChange = (value, fieldName) => {
+    console.log(fieldName,value)
     setCampaign({ ...campaign, [fieldName]: value });
+
   };
 
   //Handling Adding a new Campaign
@@ -57,7 +59,7 @@ const AddCampaignForm = ({ user }) => {
       </Form.Item>
       <Form.Item label="Campaign Date">
         <Input
-          type="date"
+          type="datetime-local"
           onChange={(e) => handleChange(e.target.value, "date")}
         />
       </Form.Item>

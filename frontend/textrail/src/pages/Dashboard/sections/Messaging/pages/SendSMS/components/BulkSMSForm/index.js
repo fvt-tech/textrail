@@ -13,16 +13,23 @@ import {
 } from "antd";
 import React, { useState, useEffect } from "react";
 import { UsergroupAddOutlined, UploadOutlined } from "@ant-design/icons";
+import { textrailAddCampaign } from "../../../../../../../../functions/campaigns";
 const { Option } = Select;
-const BulkSMSForm = ({ onChange, reset, groups }) => {
+const BulkSMSForm = ({ onChange, reset, groups, user }) => {
+  const [recurring, setRecurring] = useState(false);
+
   //States
   const [sms, setSms] = useState({
-    numbers: [],
-    sender: "",
+    contacts: [],
+    senderID: "",
     message: "",
-    schedule: false,
   });
   const [selectedGroup, setSelectedGroup] = useState("");
+
+  // Handle message transmission
+  const handleSendMessage = async () => {
+    await textrailAddCampaign();
+  };
 
   //Const Handle Group Selection
   const handleSelectGroup = (name) => setSelectedGroup(name);
@@ -54,7 +61,7 @@ const BulkSMSForm = ({ onChange, reset, groups }) => {
   return (
     <Form layout="vertical">
       <label style={{ marginBottom: 10, display: "block" }}>
-        Import Numbers
+        Import contacts
       </label>
       <Row>
         <Col style={{ marginRight: "10px" }}>
@@ -83,27 +90,50 @@ const BulkSMSForm = ({ onChange, reset, groups }) => {
       )}
       <Form.Item label="Sender ID">
         <Select
-          style={{ height: "100%" }}
+          style={{ width: "min(400px,100%)" }}
           placeholder="Select a sender"
         ></Select>
       </Form.Item>
       <Form.Item label="Message">
-        <div style={{ display: "flex", height: "auto" }}>
-          <Input.TextArea
-            type="text"
-            value={sms.message}
-            onChange={(e) => handleChange(e, "message")}
-            style={{ marginRight: "10px" }}
-          />
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <Select
-            style={{ height: "100%" }}
+            style={{ width: "min(800px,100%)", marginBottom: "1rem" }}
             placeholder="Select a saved message"
           ></Select>
+          <Input.TextArea
+            type="text"
+            style={{ width: "min(800px,100%)" }}
+            value={sms.message}
+            onChange={(e) => handleChange(e, "message")}
+          />
         </div>
       </Form.Item>
-      <Form.Item>
-        <Checkbox>Schedule Message</Checkbox>
+      <Form.Item label="Start Date" style={{ width: "min(400px,100%)" }}>
+        <Input type="datetime-local" />
       </Form.Item>
+      <Form.Item>
+        <Checkbox onChange={(e) => setRecurring(e.target.checked)}>
+          Recurring
+        </Checkbox>
+      </Form.Item>
+      {recurring && (
+        <Row>
+          <Col sm={24} md={12}>
+            <Form.Item label="Frequency" style={{ width: "90%" }}>
+              <Select placeholder="Select the frequency">
+                <Option>Daily</Option>
+                <Option>Monthly</Option>
+                <Option>Yearly</Option>
+              </Select>
+            </Form.Item>
+          </Col>
+          <Col sm={24} md={12}>
+            <Form.Item label="End Date" style={{ width: "90%" }}>
+              <Input type="datetime-local" />
+            </Form.Item>
+          </Col>
+        </Row>
+      )}
     </Form>
   );
 };
