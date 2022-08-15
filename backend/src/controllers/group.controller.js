@@ -101,6 +101,7 @@ const addContactToGroup = async (req, res) => {
     const { id, contact, user } = req.body
     try {
         const group = await Group.findById(id)
+        console.log(contact)
         if (Array.isArray(contact)) {
             contact.forEach(async (item) => {
                 const newContact = new Contact({
@@ -110,6 +111,7 @@ const addContactToGroup = async (req, res) => {
                 })
                 await newContact.save()
                 group.contacts.push(newContact._id)
+                await group.save();
             })
             res.status(201).json({
                 status: 'Addition successful',
