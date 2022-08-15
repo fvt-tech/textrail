@@ -16,7 +16,7 @@ const { Option } = Select;
 const { TabPane } = Tabs;
 //This is the button and modal the realises adding a contact to a group or uploading a file of contacts
 const AddContactsToGroup = ({ groups, user }) => {
-  console.log(user);
+  // console.log(user);
   const [visible, setVisible] = useState(false);
   return (
     <div style={{ margin: "0px 6px" }}>

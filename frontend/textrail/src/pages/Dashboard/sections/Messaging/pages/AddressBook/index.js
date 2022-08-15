@@ -27,6 +27,7 @@ const AddressBook = () => {
       const response = await textrailGetGroups(user._id);
 
       if (response) {
+        console.log(response);
         setGroups(response.data);
       }
     };
